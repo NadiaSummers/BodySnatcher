@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <glut.h>
 #include "Terrain.h"
-#include <lua.hpp>
+
 
 using namespace std;
 
@@ -14,6 +14,10 @@ Terrain::Terrain()
 	scaleY = 1;
 	scaleZ = 1;
 }
+
+
+
+
 
 bool Terrain::generateTerrain(char *filename, const int newSize)
 {

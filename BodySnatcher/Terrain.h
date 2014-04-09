@@ -1,14 +1,13 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
-
 class Terrain
 {
 public:
 	Terrain();
 	void render();
 	bool generateTerrain(char *filename, const int size);
-	
+	//int cpp_generateTerrain(lua_State *luaVM);
 	
 	void setScalingFactor(float scaleX, float scaleY, float scaleZ);
 	int getSize();
