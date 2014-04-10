@@ -10,19 +10,23 @@ IPhysics::IPhysics(){
 }
 
 IPhysics::~IPhysics(){
-	//delete dynamics world
 	delete dynamicsWorld;
-	//delete solver
 	delete solver;
-	//delete broadphase
 	delete overlappingPairCache;
-	//delete dispatcher
 	delete dispatcher;
-	//delete collistion configuration
 	delete collisionConfiguration;
 }
 void IPhysics::setGravity(float g){
 	dynamicsWorld->setGravity(btVector3(0, -g, 0));
+}
+
+void IPhysics::createGroundPlane(float xSize, float ySize, float zSize, float xPos, float yPos, float zPos){
+	btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(xSize,ySize,zSize),1);
+	collisionShapes.push_back(groundShape);
+
+	btTransform groundTransform;
+	groundTransform.setIdentity();
+	groundTransform.setOrigin(btVector3(xPos, yPos, zPos));
 }
 
 void IPhysics::createBoundingBox(float x, float y, float z){
@@ -37,3 +41,9 @@ void IPhysics::deleteCollisionShapes(){
 		delete shape;
 	}
 }
+
+bool IPhysics::collision(btManifoldPoint& cp, const btCollisionObject* obj){
+
+	return false;
+}
+
