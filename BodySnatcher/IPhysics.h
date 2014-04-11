@@ -4,7 +4,7 @@
  *
  * @author Daniel Manganaro
  * @version 01
- * @date 10/04/2014 Johanna Wald - Basic Implementation
+ * @date 10/04/2014 Daniel Manganaro - Basic Implementation
  */
 
 #include "Physics\src\btBulletDynamicsCommon.h"
