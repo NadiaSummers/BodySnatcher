@@ -1,6 +1,8 @@
 /**
  * @class IPhysics
- * @brief The IPhysics facades the Physics and Collision Engine
+ * @brief The IPhysics facades the third party Bullet Physics and Collision Engine.
+ * @brief It creates a new "world" then lets you add objects to that "world" and update the world each frame.
+ * @brief Bullet will take care of collisions for you.
  *
  * @author Daniel Manganaro
  * @version 01

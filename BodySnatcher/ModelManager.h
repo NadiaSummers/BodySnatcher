@@ -16,7 +16,7 @@
 #include "IAssetManager.h"
 #include <GL/freeglut.h>
 
-enum eModels { 
+enum eModels { mDog=0,
 			   MODELS_SIZE };
 
 class ModelLoader;

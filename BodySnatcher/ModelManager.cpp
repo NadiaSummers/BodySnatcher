@@ -17,9 +17,7 @@ void ModelManager::init()
 	for (int i = 0; i < MODELS_SIZE; i++) 
 		mModels[i] = new ModelLoader;
 
-
-
-
+	mModels[mDog]->load("models/german_shepard/dog.obj");
 
 	std::cout << "Models Loaded." << std::endl;
 }
