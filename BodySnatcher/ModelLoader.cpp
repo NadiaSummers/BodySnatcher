@@ -5,8 +5,10 @@
 // normals, texels and faces. Loads and Draws a 3D model into a 3D environment.
 //
 // Author: Raymond Forster
-// Version: 01
-// Date: 10/04/2014 Raymond Forster - started
+// Version: 03
+// Date: 20/08/2012 Raymond Forster - started
+// Date: 07/09/2012 Raymond Forster - added texture mapping
+// Date: 10/09/2013 Raymond Forster - modified texture mapping to match image orientation
 //--------------------------------------------------------------------------------------
 
 /*
@@ -206,3 +208,24 @@ void ModelLoader::parseFace(char *line)
 		sscanf(line, "f %d/%d/%d %d/%d/%d %d/%d/%d", &faces.back().v1, &faces.back().vt1, &faces.back().vn1, &faces.back().v2, &faces.back().vt2, &faces.back().vn2, &faces.back().v3, &faces.back().vt3, &faces.back().vn3);
 	}
 }
+
+vector<Face> ModelLoader::getFaces()
+{
+	return faces;
+}
+
+vector<Vector> ModelLoader::getVertices()
+{
+	return vertices;
+}
+
+vector<Vector> ModelLoader::getTexels()
+{
+	return texels;
+}
+
+vector<Vector> ModelLoader::getNormals()
+{
+	return normals;
+}
+

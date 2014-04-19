@@ -118,3 +118,19 @@ bool Terrain::inbounds(int xPos, int zPos)
 	else
 		return false;
 }
+
+
+float Terrain::GetScaleX()
+{
+	return scaleX;
+}
+
+float Terrain::GetScaleY()
+{
+	return scaleY;
+}
+
+float Terrain::GetScaleZ()
+{
+	return scaleZ;
+}

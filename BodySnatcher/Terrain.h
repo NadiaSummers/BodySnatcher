@@ -14,6 +14,10 @@ public:
 	float getHeight(int xPos, int zPos);
 	unsigned char getHeightColor(int xPos, int zPos);
 	bool inbounds(int xPos, int zPos);
+
+	float GetScaleX(); //added by Raymond Forster
+	float GetScaleY(); //added by Raymond Forster
+	float GetScaleZ(); //added by Raymond Forster
 	
 protected:
 	

@@ -6,8 +6,10 @@
  * and Draws a 3D model into a 3D environment.
  *
  * @author Raymond Forster
- * @version 01
- * @date 10/04/2014 Raymond Forster - started
+ * @version 03
+ * @date 20/08/2012 Raymond Forster - started
+ * @date 07/09/2012 Raymond Forster - added texture mapping
+ * @date 10/09/2013 Raymond Forster - modified texture mapping to match image orientation
  */
 
 //--------------------------------------------------------------------------------------
@@ -99,6 +101,12 @@ class ModelLoader
 			 * @return void
              */
 		void draw();
+
+		//ADDED RAYMOND FORSTER 
+		vector<Face> getFaces();
+		vector<Vector> getVertices();
+		vector<Vector> getTexels();
+		vector<Vector> getNormals();
 
 	private:
 		vector<Vector> vertices; /**< Stores a list of vertices used by the 3D model*/
