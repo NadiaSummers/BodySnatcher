@@ -1,6 +1,6 @@
-#include "IPhysics.h"
+#include "BulletPhysics.h"
 
-IPhysics::IPhysics(){
+BulletPhysics::BulletPhysics(){
 	collisionConfiguration = new btDefaultCollisionConfiguration();
 	dispatcher = new btCollisionDispatcher(collisionConfiguration);
 	overlappingPairCache = new btDbvtBroadphase();
@@ -9,18 +9,18 @@ IPhysics::IPhysics(){
 	dynamicsWorld->setGravity(btVector3(0,-9.81f,0));		
 }
 
-IPhysics::~IPhysics(){
+BulletPhysics::~BulletPhysics(){
 	delete dynamicsWorld;
 	delete solver;
 	delete overlappingPairCache;
 	delete dispatcher;
 	delete collisionConfiguration;
 }
-void IPhysics::setGravity(float g){
+void BulletPhysics::setGravity(float g){
 	dynamicsWorld->setGravity(btVector3(0, -g, 0));
 }
 
-btCollisionShape* IPhysics::createGroundPlane(float xSize, float ySize, float zSize, float xPos, float yPos, float zPos){
+btCollisionShape* BulletPhysics::createGroundPlane(float xSize, float ySize, float zSize, float xPos, float yPos, float zPos){
 	btCollisionShape* groundShape = new btStaticPlaneShape(btVector3(xSize,ySize,zSize),1);
 	collisionShapes.push_back(groundShape);
 
@@ -31,7 +31,7 @@ btCollisionShape* IPhysics::createGroundPlane(float xSize, float ySize, float zS
 	return groundShape;
 }
 
-btRigidBody* IPhysics::createBox(float sx, float sy, float sz, float xPos, float yPos, float zPos, float mass){
+btRigidBody* BulletPhysics::createBox(float sx, float sy, float sz, float xPos, float yPos, float zPos, float mass){
 	btCollisionShape* boxShape = new btBoxShape(btVector3(btScalar(sx),btScalar(sy),btScalar(sz)));
 	collisionShapes.push_back(boxShape);
 
@@ -57,7 +57,7 @@ btRigidBody* IPhysics::createBox(float sx, float sy, float sz, float xPos, float
 	return body;
 }
 
-void IPhysics::deleteCollisionShapes(){
+void BulletPhysics::deleteCollisionShapes(){
 	for(int i = 0; i < collisionShapes.size(); i++){
 		btCollisionShape* shape = collisionShapes[i];
 		collisionShapes[i] = 0;
@@ -65,7 +65,7 @@ void IPhysics::deleteCollisionShapes(){
 	}
 }
 
-void IPhysics::simulate(float timeStep){
+void BulletPhysics::simulate(float timeStep){
 	dynamicsWorld->stepSimulation(btScalar(timeStep), 10);
 }
 
