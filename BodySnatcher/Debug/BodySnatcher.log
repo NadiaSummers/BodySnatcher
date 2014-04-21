@@ -1,27 +1,78 @@
-﻿Build started 11/04/2014 01:52:24 AM.
+﻿Build started 21/04/2014 12:19:12 PM.
      1>Project "E:\BodySnatcher\BodySnatcher\BodySnatcher\BodySnatcher.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\BodySnatcher.unsuccessfulbuild" because "AlwaysCreate" was specified.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\Physics\src /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt gameObject.cpp main.cpp Terrain.cpp vector.cpp
-         vector.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I..\..\Physics\src /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt FirstPersonCamera.cpp GameEngineCore.cpp gameObject.cpp IOSystem.cpp main.cpp ModelLoader.cpp OpenGLGraphics.cpp Terrain.cpp Timer.cpp Vector3D.cpp
+         Vector3D.cpp
+         Timer.cpp
          Terrain.cpp
-         main.cpp
+         OpenGLGraphics.cpp
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\openglgraphics.cpp(38): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\openglgraphics.cpp(40): warning C4018: '<' : signed/unsigned mismatch
+         ModelLoader.cpp
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(121): warning C4018: '<' : signed/unsigned mismatch
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(148): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(197) : see declaration of 'strtok'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(148): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(238) : see declaration of 'strdup'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(177): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(186): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(195): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(205): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\modelloader.cpp(208): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(325) : see declaration of 'sscanf'
+         IOSystem.cpp
+     1>c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(353): error C2381: 'exit' : redefinition; __declspec(noreturn) differs
+                 e:\bodysnatcher\bodysnatcher\bodysnatcher\include\glut.h(146) : see declaration of 'exit'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(15): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(42): error C2061: syntax error : identifier 'GameEngineCore'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(15): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(30): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(30): warning C4183: 'GetIOSystem': missing return type; assumed to be a member function returning 'int'
          gameObject.cpp
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\vector2d.h(24): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\vector2d.h(25): warning C4244: '=' : conversion from 'int' to 'float', possible loss of data
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameobject.h(113): warning C4244: 'return' : conversion from 'float' to 'unsigned short', possible loss of data
+         GameEngineCore.cpp
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(15): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\firstpersoncamera.h(42): error C2061: syntax error : identifier 'GameEngineCore'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(12): error C2061: syntax error : identifier 'GameEngineCore'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(26): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.cpp(6): error C2664: 'FirstPersonCamera::FirstPersonCamera(const FirstPersonCamera &)' : cannot convert parameter 1 from 'GameEngineCore *const ' to 'const FirstPersonCamera &'
+                 Reason: cannot convert from 'GameEngineCore *const ' to 'const FirstPersonCamera'
+                 No constructor could take the source type, or constructor overload resolution was ambiguous
+         FirstPersonCamera.cpp
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(12): error C2061: syntax error : identifier 'GameEngineCore'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(26): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\iosystem.h(26): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(13): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(13): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(28): error C2143: syntax error : missing ';' before '*'
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(28): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>e:\bodysnatcher\bodysnatcher\bodysnatcher\gameenginecore.h(28): warning C4183: 'GetCamera': missing return type; assumed to be a member function returning 'int'
          Generating Code...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\BodySnatcher\BodySnatcher\BodySnatcher\Debug\BodySnatcher.exe" /NOLOGO /LIBPATH:C:\Users\Daniel\Documents\GitHub\BodySnatcher\BodySnatcher\Physics\lib lua5.1.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\BodySnatcher.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\BodySnatcher\BodySnatcher\BodySnatcher\Debug\BodySnatcher.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\BodySnatcher\BodySnatcher\BodySnatcher\Debug\BodySnatcher.lib" /MACHINE:X86 Debug\gameObject.obj
-         Debug\main.obj
-         Debug\Terrain.obj
-         Debug\vector.obj
-         BodySnatcher.vcxproj -> E:\BodySnatcher\BodySnatcher\BodySnatcher\Debug\BodySnatcher.exe
-       Manifest:
-         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\BodySnatcher\BodySnatcher\BodySnatcher\Debug\BodySnatcher.exe;#1" /manifest Debug\BodySnatcher.exe.intermediate.manifest
-       FinalizeBuildStatus:
-         Deleting file "Debug\BodySnatcher.unsuccessfulbuild".
-         Touching "Debug\BodySnatcher.lastbuildstate".
-     1>Done Building Project "E:\BodySnatcher\BodySnatcher\BodySnatcher\BodySnatcher.vcxproj" (build target(s)).
+         Skipping... (no relevant changes detected)
+         main.cpp
+     1>Done Building Project "E:\BodySnatcher\BodySnatcher\BodySnatcher\BodySnatcher.vcxproj" (build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:01.81
+Time Elapsed 00:00:05.53
