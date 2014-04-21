@@ -56,7 +56,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua5.1.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua5.1.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Daniel\Documents\GitHub\BodySnatcher\BodySnatcher\Physics\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -75,14 +75,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="FirstPersonCamera.cpp" />
     <ClCompile Include="GameEngineCore.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="IOSystem.cpp" />
+=======
+>>>>>>> a6240acb9e0c6f6a71317e9fd8a68a0dc9a360c9
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="OpenGLGraphics.cpp" />
     <ClCompile Include="Terrain.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="vector.cpp" />
     <ClCompile Include="Vector3D.cpp" />
@@ -101,6 +105,11 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="Vector3D.h" />
+=======
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Terrain.h" />
+>>>>>>> a6240acb9e0c6f6a71317e9fd8a68a0dc9a360c9
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
