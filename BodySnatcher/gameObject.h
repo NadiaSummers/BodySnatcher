@@ -7,12 +7,11 @@
 #define __GAMEOBJECT_H
 
 #include <iostream>
-using namespace std;
-
 #include "vector.h"
 #include "collision.h"
 #include "AABB.h"
 
+using namespace std;
 
 class gameObject
 {

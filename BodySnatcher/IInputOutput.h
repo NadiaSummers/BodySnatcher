@@ -1,7 +1,9 @@
-#pragma once
+#ifndef IINPUTOUTPUT_H
+#define IINPUTOUTPUT_H
 
-#include "GameEngineCore.h"
+//#include "GameEngineCore.h"
 
+class GameEngineCore;
 class IInputOutput
 {
 	public:
@@ -15,4 +17,4 @@ class IInputOutput
 		virtual bool* GetKeyStates() = 0;
 		virtual bool* GetSpecialKeyStates() = 0;
 };
-
+#endif

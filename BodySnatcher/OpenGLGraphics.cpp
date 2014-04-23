@@ -1,10 +1,8 @@
-#include <iostream>
 #include "OpenGLGraphics.h"
 
-using namespace std;
-
-OpenGLGraphics::OpenGLGraphics()
+OpenGLGraphics::OpenGLGraphics(GameEngineCore* engineCore):mEngineCore(engineCore)
 {
+	m_DisplayLists = glGenLists (m_Models.size());
 }
 
 
@@ -29,24 +27,28 @@ void OpenGLGraphics::GenerateRenderLists(vector<ModelLoader> m)
 
 	if(!m.empty())
 	{
-	
-		GLuint listName = glGenLists (1);
-	
-		glNewList (listName, GL_COMPILE);
-			glColor3f (1.0, 0.0, 0.0);  /*  current color red  */
-			glBegin (GL_TRIANGLES);
-				for(int i=0; i<m.size(); i++) //for each model
-				{
-					for(int j=0; j<m[i].getFaces().size(); j++) //for each of the model's faces
+		for(unsigned int i=0; i<m.size(); i++) //for each model
+		{
+			glNewList (i, GL_COMPILE);
+				glBegin (GL_TRIANGLES);
+					for(unsigned int j=0; j<m[i].getFaces().size(); j++) //for each of the model's faces
 					{
+						glNormal3f(m[i].getNormals()[m[i].getFaces()[i].vn1 - 1].x, m[i].getNormals()[m[i].getFaces()[i].vn1 - 1].y, m[i].getNormals()[m[i].getFaces()[i].vn1 - 1].z); //set normals for vertex 1
+						glTexCoord3f(m[i].getTexels()[m[i].getFaces()[i].vt1 - 1].x, m[i].getTexels()[m[i].getFaces()[i].vt1 - 1].y*-1, m[i].getTexels()[m[i].getFaces()[i].vt1 - 1].z); //set texture coordinates for vertex 1
 						glVertex3f (m[i].getVertices()[m[i].getFaces()[j].v1 - 1].x, m[i].getVertices()[m[i].getFaces()[j].v1 - 1].y, m[i].getVertices()[m[i].getFaces()[j].v1 - 1].z); //first vertex of the face
+						
+						glNormal3f(m[i].getNormals()[m[i].getFaces()[i].vn2 - 1].x, m[i].getNormals()[m[i].getFaces()[i].vn2 - 1].y, m[i].getNormals()[m[i].getFaces()[i].vn2 - 1].z); //set normals for vertex 2
+						glTexCoord3f(m[i].getTexels()[m[i].getFaces()[i].vt2 - 1].x, m[i].getTexels()[m[i].getFaces()[i].vt2 - 1].y*-1, m[i].getTexels()[m[i].getFaces()[i].vt2 - 1].z); //set texture coordinates for vertex 2
 						glVertex3f (m[i].getVertices()[m[i].getFaces()[j].v2 - 1].x, m[i].getVertices()[m[i].getFaces()[j].v2 - 1].y, m[i].getVertices()[m[i].getFaces()[j].v2 - 1].z); //second vertex of the face
+						
+						glNormal3f(m[i].getNormals()[m[i].getFaces()[i].vn3 - 1].x, m[i].getNormals()[m[i].getFaces()[i].vn3 - 1].y, m[i].getNormals()[m[i].getFaces()[i].vn3 - 1].z); //set normals for vertex 3
+						glTexCoord3f(m[i].getTexels()[m[i].getFaces()[i].vt3 - 1].x, m[i].getTexels()[m[i].getFaces()[i].vt3 - 1].y*-1, m[i].getTexels()[m[i].getFaces()[i].vt3 - 1].z); //set texture coordinates for vertex 3
 						glVertex3f (m[i].getVertices()[m[i].getFaces()[j].v3 - 1].x, m[i].getVertices()[m[i].getFaces()[j].v3 - 1].y, m[i].getVertices()[m[i].getFaces()[j].v3 - 1].z); //third vertex of the face
 					}
-				}
-			glEnd ();
-			//glTranslatef (1.5, 0.0, 0.0); /*  move position  */
-		glEndList ();
+				glEnd ();
+				//glTranslatef (1.5, 0.0, 0.0); /*  move position  */
+			glEndList ();
+		}
 	}
 }
 

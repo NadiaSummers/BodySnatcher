@@ -1,12 +1,15 @@
-#pragma once
+#ifndef GAMEENGINECORE_H
+#define GAMEENGINECORE_H
 
-#include "GameEngineCore.h"
 #include "FirstPersonCamera.h"
 #include "IOSystem.h"
 #include "OpenGLGraphics.h"
 #include "Terrain.h"
 #include "ModelLoader.h"
 
+class FirstPersonCamera;
+class IOSystem;
+class OpenGLGraphics;
 class GameEngineCore
 {
 	private:
@@ -25,10 +28,10 @@ class GameEngineCore
 		void Draw();
 
 		// Get Methods
-		FirstPersonCamera* GetCamera();
-		OpenGLGraphics* GetGraphicsEngine();
-		IOSystem* GetIOSystem();
-		Terrain* GetTerrainEngine();
-		ModelLoader* GetModelLoader();
+		FirstPersonCamera GetCamera();
+		OpenGLGraphics GetGraphicsEngine();
+		IOSystem GetIOSystem();
+		Terrain GetTerrainEngine();
+		ModelLoader GetModelLoader();
 };
-
+#endif

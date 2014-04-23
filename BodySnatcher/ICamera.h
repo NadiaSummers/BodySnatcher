@@ -1,7 +1,8 @@
-#pragma once
+#ifndef ICAMERA_H
+#define ICAMERA_H
 
 #include "Vector3D.h"
-#include "GameEngineCore.h"
+//#include "GameEngineCore.h"
 
 class ICamera
 {
@@ -157,4 +158,4 @@ class ICamera
 		virtual bool* GetKeyStates() = 0;
 		virtual bool* GetSpecialKeyStates() = 0;
 };
-
+#endif

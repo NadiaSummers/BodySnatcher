@@ -1,12 +1,16 @@
-#pragma once
+#ifndef OPENGLGRAPHICS_H
+#define OPENGLGRAPHICS_H
 
+#include <stdlib.h> 
 #include <glut.h>
 #include "IGraphics.h"
+#include "GameEngineCore.h"
 
+class GameEngineCore;
 class OpenGLGraphics : public IGraphics
 {
 	public:
-		OpenGLGraphics();
+		OpenGLGraphics(GameEngineCore* engineCore);
 		~OpenGLGraphics();
 
 		void Initialise();
@@ -16,6 +20,8 @@ class OpenGLGraphics : public IGraphics
 		void RenderTerrain(Terrain *t);
 
 	private:
-		vector<ModelLoader> models;
+		GameEngineCore* mEngineCore;
+		vector<ModelLoader> m_Models;
+		GLuint m_DisplayLists;
 };
-
+#endif

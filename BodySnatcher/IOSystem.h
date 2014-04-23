@@ -1,11 +1,13 @@
-#pragma once
+#ifndef IOSYSTEM_H
+#define IOSYSTEM_H
 
-#include <glut.h>
 #include <stdlib.h>
+#include <glut.h>
 #include <math.h>
 #include "IInputOutput.h"
 #include "GameEngineCore.h"
 
+class GameEngineCore;
 class IOSystem : public IInputOutput
 {
 	public:
@@ -28,4 +30,4 @@ class IOSystem : public IInputOutput
 		bool mKeyStates[256]; /**< Tracks the states of keyboard keys (true = key pressed, false = key not pressed)*/
 		bool mSpecialKeyStates[4]; /**< Tracks the states of special arrow keys (true = key pressed, false = key not pressed*/
 };
-
+#endif

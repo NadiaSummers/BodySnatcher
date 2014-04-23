@@ -4,7 +4,8 @@
 GameEngineCore::GameEngineCore()
 {
 	mCamera = new FirstPersonCamera(this);
-	mGraphicsEngine = new OpenGLGraphics();
+	mGraphicsEngine = new OpenGLGraphics(this);
+	mIOSystem = new IOSystem(this);
 	mTerrainEngine = new Terrain();
 	mModelLoader = new ModelLoader();
 }
@@ -31,32 +32,32 @@ void GameEngineCore::Draw()
 }
 
 
-FirstPersonCamera* GameEngineCore::GetCamera()
+FirstPersonCamera GameEngineCore::GetCamera()
 {
-	return mCamera;
+	return *mCamera;
 }
 
 
-OpenGLGraphics* GameEngineCore::GetGraphicsEngine()
+OpenGLGraphics GameEngineCore::GetGraphicsEngine()
 {
-	return mGraphicsEngine;
+	return *mGraphicsEngine;
 }
 
 
-IOSystem* GameEngineCore::GetIOSystem()
+IOSystem GameEngineCore::GetIOSystem()
 {
-	return mIOSystem;
+	return *mIOSystem;
 }
 
 
-Terrain* GameEngineCore::GetTerrainEngine()
+Terrain GameEngineCore::GetTerrainEngine()
 {
-	return mTerrainEngine;
+	return *mTerrainEngine;
 }
 
 
-ModelLoader* GameEngineCore::GetModelLoader()
+ModelLoader GameEngineCore::GetModelLoader()
 {
-	return mModelLoader;
+	return *mModelLoader;
 }
 

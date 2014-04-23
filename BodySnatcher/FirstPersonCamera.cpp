@@ -220,33 +220,33 @@ void FirstPersonCamera::MouseMotion(int x, int y)
 
 void FirstPersonCamera::KeyOperations(void)
 {
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['q'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['q'])
 	{
 		mYrotrad = (mRotationY / 180 * 3.141592654f);
 		mPositionDifference.x -= float(cos(mYrotrad)) * mSpeed;
 		mPositionDifference.z -= float(sin(mYrotrad)) * mSpeed;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['e'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['e'])
 	{
 		mYrotrad = (mRotationY / 180 * 3.141592654f);
 		mPositionDifference.x += float(cos(mYrotrad)) * mSpeed;
 		mPositionDifference.z += float(sin(mYrotrad)) * mSpeed;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['r'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['r'])
 	{
 		if(mRotationX < mMaxAngle) //restrict maximum vertical camera angle to mMaxAngle
 			mRotationX += 1;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['f'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['f'])
 	{
 		if(mRotationX > mMinAngle) //restrict minimum vertical camera angle to mMinAngle
 			mRotationX -= 1;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['w'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['w'])
 	{
 		mYrotrad = (mRotationY / 180 * 3.141592654f);
 		mXrotrad = (mRotationY / 180 * 3.141592654f); 
@@ -255,7 +255,7 @@ void FirstPersonCamera::KeyOperations(void)
 		mPositionDifference.y -= float(sin(mXrotrad)) * mSpeed;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['s'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['s'])
 	{
 		mYrotrad = (mRotationY / 180 * 3.141592654f);
 		mXrotrad = (mRotationX / 180 * 3.141592654f); 
@@ -264,7 +264,7 @@ void FirstPersonCamera::KeyOperations(void)
 		mPositionDifference.y += float(sin(mXrotrad)) * mSpeed;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['a'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['a'])
 	{
 		if(!mMouseClicked)
 		{
@@ -280,7 +280,7 @@ void FirstPersonCamera::KeyOperations(void)
 
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['d'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['d'])
 	{
 		if(!mMouseClicked)
 		{
@@ -295,17 +295,17 @@ void FirstPersonCamera::KeyOperations(void)
 		}
 	}
 
-	if(mEngineCore->GetIOSystem()->GetSpecialKeyStates()[0])
+	if(mEngineCore->GetIOSystem().GetSpecialKeyStates()[0])
 	{
 		mRotationY += -1.0f;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetSpecialKeyStates()[1])
+	if(mEngineCore->GetIOSystem().GetSpecialKeyStates()[1])
 	{
 		mRotationY += 1.0f;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetSpecialKeyStates()[2])
+	if(mEngineCore->GetIOSystem().GetSpecialKeyStates()[2])
 	{
 		mYrotrad = (mRotationY / 180 * 3.141592654f);
 		mXrotrad = (mRotationX / 180 * 3.141592654f); 
@@ -314,7 +314,7 @@ void FirstPersonCamera::KeyOperations(void)
 		mPositionDifference.y -= float(sin(mXrotrad)) * mSpeed;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetSpecialKeyStates()[3])
+	if(mEngineCore->GetIOSystem().GetSpecialKeyStates()[3])
 	{
 		mYrotrad = (mRotationY / 180 * 3.141592654f);
 		mXrotrad = (mRotationX / 180 * 3.141592654f); 
@@ -323,11 +323,11 @@ void FirstPersonCamera::KeyOperations(void)
 		mPositionDifference.y += float(sin(mXrotrad)) * mSpeed;
 	}
 
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['o'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['o'])
 	{
 		mPositionDifference.y += 1.0f * mSpeed;
 	}
-	if(mEngineCore->GetIOSystem()->GetKeyStates()['l'])
+	if(mEngineCore->GetIOSystem().GetKeyStates()['l'])
 	{
 		mPositionDifference.y -= 1.0f * mSpeed;
 	}

@@ -189,7 +189,7 @@ void IOSystem::KeyboardUp(unsigned char key, int x, int y)
 
 void IOSystem::Mouse(int button, int state, int x, int y)
 {
-	mEngineCore->GetCamera()->Mouse(button, state, x, y);
+	mEngineCore->GetCamera().Mouse(button, state, x, y);
 	//mLastX = (float)x; //set lastx to the current x position
 	//mLastY = (float)y; //set lasty to the current y position
 	//
@@ -211,7 +211,7 @@ void IOSystem::Mouse(int button, int state, int x, int y)
 
 void IOSystem::MouseMove(int x, int y)
 {
-	mEngineCore->GetCamera()->MouseMotion(x, y);
+	mEngineCore->GetCamera().MouseMotion(x, y);
 	//mDiffX = 0;// = x-lastx; //check the difference between the current x and the last x position
 	//mDiffY = 0;// = y-lasty; //check the difference between the current y and the last y position
 
