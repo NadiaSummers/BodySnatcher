@@ -7,7 +7,7 @@ GameEngineCore::GameEngineCore()
 	mGraphicsEngine = new OpenGLGraphics(this);
 	mIOSystem = new IOSystem(this);
 	mTerrainEngine = new Terrain();
-	mModelLoader = new ModelLoader();
+	mModels = new Model3D();
 }
 
 
@@ -56,8 +56,8 @@ Terrain GameEngineCore::GetTerrainEngine()
 }
 
 
-ModelLoader GameEngineCore::GetModelLoader()
+Model3D GameEngineCore::GetModels()
 {
-	return *mModelLoader;
+	return *mModels;
 }
 

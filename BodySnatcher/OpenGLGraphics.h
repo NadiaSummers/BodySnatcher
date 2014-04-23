@@ -15,13 +15,13 @@ class OpenGLGraphics : public IGraphics
 
 		void Initialise();
 		void Update();
-		void GenerateRenderLists(vector<ModelLoader> m);
+		void GenerateRenderLists(vector<Model3D> m);
 		void RenderScene();
 		void RenderTerrain(Terrain *t);
 
 	private:
 		GameEngineCore* mEngineCore;
-		vector<ModelLoader> m_Models;
+		vector<Model3D> m_Models;
 		GLuint m_DisplayLists;
 };
 #endif

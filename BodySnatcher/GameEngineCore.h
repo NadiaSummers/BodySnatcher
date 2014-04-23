@@ -5,7 +5,7 @@
 #include "IOSystem.h"
 #include "OpenGLGraphics.h"
 #include "Terrain.h"
-#include "ModelLoader.h"
+#include "Model3D.h"
 
 class FirstPersonCamera;
 class IOSystem;
@@ -17,7 +17,7 @@ class GameEngineCore
 		OpenGLGraphics* mGraphicsEngine;
 		IOSystem* mIOSystem;
 		Terrain* mTerrainEngine;
-		ModelLoader* mModelLoader;
+		Model3D* mModels;
 
 	public:
 		GameEngineCore();
@@ -32,6 +32,6 @@ class GameEngineCore
 		OpenGLGraphics GetGraphicsEngine();
 		IOSystem GetIOSystem();
 		Terrain GetTerrainEngine();
-		ModelLoader GetModelLoader();
+		Model3D GetModels();
 };
 #endif

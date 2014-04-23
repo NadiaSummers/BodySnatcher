@@ -21,7 +21,7 @@ void OpenGLGraphics::Update()
 }
 
 
-void OpenGLGraphics::GenerateRenderLists(vector<ModelLoader> m)
+void OpenGLGraphics::GenerateRenderLists(vector<Model3D> m)
 {
 	cout << "method called: OpenGLGraphics::GenerateRenderLists(vector<ModelLoader>* m)" << endl;
 
