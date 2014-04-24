@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <glut.h>
+#include <lua.hpp>
 
 #include "Terrain.h"
 
@@ -12,13 +13,58 @@ Terrain::Terrain()
 	scaleX = 1;
 	scaleY = 1;
 	scaleZ = 1;
+	doLua();
 }
 
-
-
-bool Terrain::generateTerrain(GLuint *texture, char *filename, const int newSize)
+bool Terrain::doLua()
 {
-	baseTexture = texture;
+	lua_State* luaState = lua_open();
+    if (luaState == NULL)
+	{
+       cout << "Error Initializing lua." << endl;
+       return false;
+    }
+
+    //load lua functions
+    luaL_openlibs(luaState);
+
+	luaL_dofile(luaState, "lua/levelone-terraingen.lua");
+
+    lua_settop(luaState, 0);
+    lua_getglobal(luaState, "baseTexture");
+    lua_getglobal(luaState, "heightmap");
+	lua_getglobal(luaState, "size");
+	lua_getglobal(luaState, "scaleX");
+	lua_getglobal(luaState, "scaleY");
+	lua_getglobal(luaState, "scaleZ");
+
+	//check if numbers are actually numbers etc
+    if((lua_isnumber(luaState, 1)) && (lua_isstring(luaState, 2)) && (lua_isnumber(luaState, 3)) && (lua_isnumber(luaState, 4)) && (lua_isnumber(luaState, 5)) && (lua_isnumber(luaState, 6)))
+	{
+		int baseTexture = (int)lua_tonumber(luaState, 1);
+		string heightmap = (string)lua_tostring(luaState, 2);
+		int size = (int)lua_tonumber(luaState, 3);
+		int scaleX = (int)lua_tonumber(luaState, 4);
+		int scaleY = (int)lua_tonumber(luaState, 5);
+		int scaleZ = (int)lua_tonumber(luaState, 6);
+
+	}
+	else
+	{
+		cout << "Error loading data." << endl;
+        system("pause");
+		return false;
+	}
+
+	//generateTerrain(texManager.getTextureID(baseTexture), heightmap, size);
+	setScalingFactor(scaleX, scaleY, scaleZ);
+  
+    lua_close(luaState); 
+}
+
+bool Terrain::generateTerrain(GLuint texture, char *filename, int newSize)
+{
+	textures.push_back(texture);
 	size = newSize;
 	
 	ifstream infile(filename, ios::binary);
@@ -27,29 +73,27 @@ bool Terrain::generateTerrain(GLuint *texture, char *filename, const int newSize
 		cerr << "Cannot open file: " << filename << endl;
 		return false;
 	}
-	else
-		cout << "Terrain: " << filename << " created." << endl;
 
-	if (size > 0)
-		terrainData = new unsigned char[size * size];
-	if (terrainData == NULL)
-		return false;
+	unsigned char *thisMap = new unsigned char[size * size];
+
 	
 	infile.seekg(0, ios::end);
 	int length = infile.tellg();
 
 	infile.seekg(0, ios::beg);
-	infile.read(reinterpret_cast<char *>(terrainData), length);
+	infile.read(reinterpret_cast<char *>(thisMap), length);
 	infile.close();
-	
+
+	terrainData.push_back(thisMap);
+	cout << "Terrain Added: " << filename << endl;
 	return true;
 }
 
-//NS -temp
-bool Terrain::addMapLayer(GLuint *texture, char *filename)
+
+bool Terrain::addMapLayer(GLuint texture, char *filename)
 {
 	//add texture to end of vector
-	textures.push_back(*texture);
+	textures.push_back(texture);
 
 
 	ifstream infile(filename, ios::binary);
@@ -57,10 +101,7 @@ bool Terrain::addMapLayer(GLuint *texture, char *filename)
 	{
 		cerr << "Cannot open file: " << filename << endl;
 		return false;
-	}
-	else
-		cout << "Terrain Layer Added: " << filename << " [" <<  (int)textures.size() << "]" << endl;
-	
+	}	
 
 	unsigned char *thisMap = new unsigned char[size * size];
 
@@ -71,8 +112,9 @@ bool Terrain::addMapLayer(GLuint *texture, char *filename)
 	infile.read(reinterpret_cast<char *>(thisMap), length);
 	infile.close();
 
-	textureMaps.push_back(thisMap);
+	terrainData.push_back(thisMap);
 
+	cout << "Terrain Layer [" <<  (int)terrainData.size() << "] Added: " << filename << endl;
 	return true;
 }
 
@@ -83,12 +125,10 @@ void Terrain::render(void)
 	float texLeft, texBottom, texTop;
 
 	glColor4f(1.0, 1.0, 1.0, 1);
-	glBindTexture(GL_TEXTURE_2D, *baseTexture);
 
-	for (int i = -1; i < (int)textures.size(); i++)
+
+	for (int i = 0; i < (int)textures.size(); i++)
 	{
-
-		if (i > -1)
 		glBindTexture(GL_TEXTURE_2D, textures[i]);
 
 		for (int z = 0; z < getSize() -1; z++)
@@ -103,7 +143,7 @@ void Terrain::render(void)
 					texTop = (float)(z + 1) / getSize() * textureScale;
 
 
-					if (i > -1)
+					if (i > 0)
 						glColor4f(1.0, 1.0, 1.0, getTextureMapHeight(x, z, i));
 
 
@@ -123,13 +163,12 @@ void Terrain::render(void)
 	}
 }
 
-//NS - should probably also scale the texture coord mapping here too. (TEMP?)
+//NS - should probably also scale the texture coord mapping here too.
 void Terrain::setScalingFactor(float xScale, float yScale, float zScale)
 {
 	scaleX = xScale;
 	scaleY = yScale;
 	scaleZ = zScale;
-
 	textureScale = scaleX / 2;
 }
 
@@ -138,11 +177,17 @@ int Terrain::getSize()
 	return size;
 }
 
+float Terrain::getTextureScale()
+{
+	return textureScale;
+}
+
 float Terrain::getHeight(int xPos, int zPos)
 {
 	if (inbounds(xPos, zPos))
 	{
-		return ((float)(terrainData[(zPos * size) + xPos]) * scaleY);
+		//always want to look at the base height [0]
+		return ((float)(terrainData[0][(zPos * size) + xPos]) * scaleY);
 	}
 	else
 		return 1;
@@ -152,7 +197,7 @@ unsigned char Terrain::getHeightColor(int xPos, int zPos)
 {
 	if (inbounds(xPos, zPos))
 	{
-		return terrainData[zPos * size + xPos];
+		return terrainData[0][zPos * size + xPos] * 255;
 	}
 	else
 		return 1;
@@ -163,8 +208,7 @@ float Terrain::getTextureMapHeight(int xPos, int zPos, int mapNum)
 {
 	if (inbounds(xPos, zPos))
 	{
-		//return textureMapData[(zPos * size) + xPos] / 255.0f;
-		return textureMaps[mapNum][(zPos * size) + xPos] / 255.0f;
+		return terrainData[mapNum][(zPos * size) + xPos] / 255.0f;
 	}
 	else
 		return 1;

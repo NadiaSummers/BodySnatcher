@@ -11,8 +11,8 @@ texManager:loadTexture(0, "textures/ground.png");
 texManager:loadTexture(1, "textures/dirt.png");
 texManager:loadTexture(2, "textures/cobble.png");
 
-newTerrain = Terrain();
-newTerrain:setScalingFactor(16, 2, 16);
-newTerrain:generateTerrain(texManager:getTexture(0), "textures/terrainheightmap.raw", 512);
-newTerrain:addMapLayer(texManager:getTexture(1), "textures/tex-dirt512.raw");
-newTerrain:addMapLayer(texManager:getTexture(2), "textures/tex-cobble512.raw");
+--newTerrain = Terrain();
+--newTerrain:setScalingFactor(16, 2, 16);
+--newTerrain:generateTerrain(texManager:getTexture(0), "textures/terrainheightmap.raw", 512);
+--newTerrain:addMapLayer(texManager:getTexture(1), "textures/tex-dirt512.raw");
+--newTerrain:addMapLayer(texManager:getTexture(2), "textures/tex-cobble512.raw");

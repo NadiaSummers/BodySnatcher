@@ -5,15 +5,24 @@
 #include <iostream>
 #include <time.h>
 #include <SOIL.h>
+#include <vector>
 #include <lua.hpp>
+#include <luabind/luabind.hpp>
+extern "C"
+{
+  #include "lua.h"
+  #include "lualib.h"
+  #include "lauxlib.h"
+}
+
 #include "Terrain.h"
+#include "TextureManager.h"
 
 using namespace std;
 
-Terrain newTerrain;
-GLuint textures[10];
-int texCount = 0;
 
+Terrain newTerrain;
+TextureManager texManager;
 
 void display(void)
 {
@@ -27,7 +36,7 @@ glClearColor(0.0f, 0.1f, 0.1f, 1.0f);
 	//gluLookAt(128, 300, -192, 256, 256, 256, 0, 1, 0);
 	//gluLookAt(500, 200, 0, 500, 0, 500, 0, 1, 0);
 
-
+	//glBindTexture(GL_TEXTURE_2D, texManager.getTextureID(grass));
 	newTerrain.render();
 
 	/*
@@ -62,23 +71,6 @@ void input(unsigned char key, int x, int y)
 {
 }
 
-//*NS temp
-void loadTexture(char* filename)
-{
-	GLuint texture = SOIL_load_OGL_texture(filename, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
-	
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
-
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-	glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
-	glBindTexture(GL_TEXTURE_2D, texture);
-	textures[texCount] = texture;
-	texCount++;
-}
-
-
 
 int main(int argc, char **argv)
 {
@@ -102,24 +94,45 @@ int main(int argc, char **argv)
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 
-
 	//do stuffs!
 
-	loadTexture("textures/ground.png");
-	loadTexture("textures/cobble.png");
-	loadTexture("textures/dirt.png");
+
+	lua_State *myLuaState = luaL_newstate();
+	luabind::open(myLuaState);
+
+	luabind::module(myLuaState)
+	[
+		luabind::class_<Terrain>("Terrain")
+		.def(luabind::constructor<>())
+		.def("setScalingFactor", &Terrain::setScalingFactor)
+		.def("generateTerrain", (void(Terrain::*)(GLuint, const char *, int)) &Terrain::generateTerrain) //because char * lol.
+		.def("addMapLayer", (void(Terrain::*)(GLuint, const char *))&Terrain::addMapLayer)				//requires explicit declaration
+	];
+
+	luabind::module(myLuaState)
+	[
+		luabind::class_<TextureManager>("TextureManager")
+		.def(luabind::constructor<>())
+		.def("loadTexture", (void(TextureManager::*)(int, const char *))&TextureManager::loadTexture)
+		.def("getTexture", &TextureManager::getTexture)
+	];
+
+	luaL_dofile(myLuaState, "lua/levelone.lua");
+
+	lua_close(myLuaState);
+	/*
+	texManager.loadTexture(0, "textures/ground.png");
+	texManager.loadTexture(1, "textures/dirt.png");
+	texManager.loadTexture(2, "textures/cobble.png");
 	
-
 	newTerrain.setScalingFactor(16, 2, 16);
-	//base texture, heightmap file, heightmap file width
-	newTerrain.generateTerrain(&textures[2], "textures/terrainheightmap.raw", 512);
-	//texture, texturemap
-	//first is bottom layer, stacks on top
-	newTerrain.addMapLayer(&textures[0], "textures/tex-dirt512.raw");
-	newTerrain.addMapLayer(&textures[1], "textures/tex-cobble512.raw");
-
+	newTerrain.generateTerrain(texManager.getTexture(0), "textures/terrainheightmap.raw", 512);
+	newTerrain.addMapLayer(texManager.getTexture(1), "textures/tex-dirt512.raw");
+	newTerrain.addMapLayer(texManager.getTexture(2), "textures/tex-cobble512.raw");
+	*/
 
     glutMainLoop();
 
+	
 	return 0;
 }

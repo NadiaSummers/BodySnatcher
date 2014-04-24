@@ -75,21 +75,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="FirstPersonCamera.cpp" />
     <ClCompile Include="GameEngineCore.cpp" />
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="IOSystem.cpp" />
-
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="OpenGLGraphics.cpp" />
     <ClCompile Include="Terrain.cpp" />
-
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="vector.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="FirstPersonCamera.h" />
     <ClInclude Include="GameEngineCore.h" />
     <ClInclude Include="gameObject.h" />
@@ -97,15 +99,15 @@
     <ClInclude Include="IGraphics.h" />
     <ClInclude Include="IInputOutput.h" />
     <ClInclude Include="IOSystem.h" />
+    <ClInclude Include="Model3D.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="OpenGLGraphics.h" />
     <ClInclude Include="Terrain.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="vector.h" />
     <ClInclude Include="Vector3D.h" />
-
   </ItemGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
