@@ -84,6 +84,58 @@ To draw the model use the draw function
 
 #include "Model3D.h"
 
+void Model3D::Copy(Model3D& model)
+{
+	Face tempface;
+	Vector tempvector;
+
+	//copy faces
+	for(int i = 0; i < model.getFaces().size(); i++)
+	{
+		tempface.v1 = model.getFaces()[i].v1;
+		tempface.v2 = model.getFaces()[i].v2;
+		tempface.v3 = model.getFaces()[i].v3;
+		tempface.vn1 = model.getFaces()[i].vn1;
+		tempface.vn2 = model.getFaces()[i].vn2;
+		tempface.vn3 = model.getFaces()[i].vn3;
+		tempface.vt1 = model.getFaces()[i].vt1;
+		tempface.vt2 = model.getFaces()[i].vt2;
+		tempface.vt3 = model.getFaces()[i].vt3;
+
+		faces.push_back(tempface);
+	}
+
+	//copy vertices
+	for(int i = 0; i < model.getVertices().size(); i++)
+	{
+		tempvector.x = model.getVertices()[i].x;
+		tempvector.y = model.getVertices()[i].y;
+		tempvector.z = model.getVertices()[i].z;
+
+		vertices.push_back(tempvector);
+	}
+
+	//copy normals
+	for(int i = 0; i < model.getNormals().size(); i++)
+	{
+		tempvector.x = model.getNormals()[i].x;
+		tempvector.y = model.getNormals()[i].y;
+		tempvector.z = model.getNormals()[i].z;
+
+		normals.push_back(tempvector);
+	}
+
+	//copy texels
+	for(int i = 0; i < model.getTexels().size(); i++)
+	{
+		tempvector.x = model.getTexels()[i].x;
+		tempvector.y = model.getTexels()[i].y;
+		tempvector.z = model.getTexels()[i].z;
+
+		texels.push_back(tempvector);
+	}
+}
+
 bool Model3D::load(char *filename)
 {
 	fstream objFile;

@@ -17,6 +17,7 @@ class FirstPersonCamera : public ICamera
 		FirstPersonCamera(GameEngineCore* engineCore);
 		~FirstPersonCamera(void);
 
+		void Initialise();
 		const Vector3D& GetposDiff();
 		const Vector3D& Getpos();
 		void SetCameraPosition();

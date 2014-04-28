@@ -72,17 +72,24 @@ class Model3D
 	public:
 
 			/**
-             * @brief Default constructor creates a new ModelLoader object.
+             * @brief Default constructor creates a new Model3D object.
              *
              * @param none
              */
 		Model3D(){};
 
 			/**
-             * @brief Destructor destroys ModelLoader object when it goes out of scope.
+             * @brief Destructor destroys Model3D object when it goes out of scope.
              * @param none
              */
 		~Model3D(){};
+
+			/**
+			 * @brief Copies a Model3D Object
+			 *
+			 * @param Model3D& - the Model3D object to be copied
+			 */
+		void Copy(Model3D& model);
 
 			/**
              * @brief Loads a 3D model from a .obj file.

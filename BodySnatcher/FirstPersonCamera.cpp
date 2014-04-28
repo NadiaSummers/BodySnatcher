@@ -3,6 +3,26 @@
 
 FirstPersonCamera::FirstPersonCamera(GameEngineCore* engineCore):mEngineCore(engineCore)
 {
+	//set camera key states to false (not pressed)
+	for(int i=0; i<256; i++)
+	{
+		mKeyStates[i] = false;
+	}
+
+	//set camera special key states (arrow keys) to false (not pressed)
+	for(int i=0; i<4; i++)
+	{
+		mSpecialKeyStates[i] = false;
+	}
+}
+
+
+FirstPersonCamera::~FirstPersonCamera(void)
+{
+}
+
+void FirstPersonCamera::Initialise()
+{
 	// intialise camera values
 	mStartPosition.x = 0;
 	mStartPosition.y = 0;
@@ -24,27 +44,8 @@ FirstPersonCamera::FirstPersonCamera(GameEngineCore* engineCore):mEngineCore(eng
 	mYrotrad;
 	mXrotrad;
 	mMouseClicked = false;
-	//mLastX = glutGet(GLUT_WINDOW_WIDTH)/2.0f; 
-	//mLastY = glutGet(GLUT_WINDOW_HEIGHT)/2.0f;
-	//mLastX = 0; 
-	//mLastY = 0;
-
-	//set camera key states to false (not pressed)
-	for(int i=0; i<256; i++)
-	{
-		mKeyStates[i] = false;
-	}
-
-	//set camera special key states (arrow keys) to false (not pressed)
-	for(int i=0; i<4; i++)
-	{
-		mSpecialKeyStates[i] = false;
-	}
-}
-
-
-FirstPersonCamera::~FirstPersonCamera(void)
-{
+	mLastX = glutGet(GLUT_WINDOW_WIDTH)/2.0f; 
+	mLastY = glutGet(GLUT_WINDOW_HEIGHT)/2.0f;
 }
 
 

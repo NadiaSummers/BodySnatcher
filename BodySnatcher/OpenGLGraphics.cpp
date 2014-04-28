@@ -23,7 +23,7 @@ void OpenGLGraphics::Update()
 
 void OpenGLGraphics::GenerateRenderLists(vector<Model3D> m)
 {
-	cout << "method called: OpenGLGraphics::GenerateRenderLists(vector<ModelLoader>* m)" << endl;
+	cout << "method called: OpenGLGraphics::GenerateRenderLists(vector<Model3D>* m)" << endl;
 
 	if(!m.empty())
 	{
@@ -87,4 +87,10 @@ void OpenGLGraphics::RenderTerrain(Terrain *t)
 			}
 		glEnd();
 	}
+}
+
+
+void OpenGLGraphics::Reshape(int w, int h)
+{
+
 }

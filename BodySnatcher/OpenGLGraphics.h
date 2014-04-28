@@ -18,6 +18,7 @@ class OpenGLGraphics : public IGraphics
 		void GenerateRenderLists(vector<Model3D> m);
 		void RenderScene();
 		void RenderTerrain(Terrain *t);
+		void Reshape(int w, int h);
 
 	private:
 		GameEngineCore* mEngineCore;
