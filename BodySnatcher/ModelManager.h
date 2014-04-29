@@ -14,7 +14,9 @@
 #pragma once
 
 #include "IAssetManager.h"
-#include <GL/freeglut.h>
+//#include <GL/freeglut.h>
+#include <stdlib.h>
+#include <glut.h>
 
 enum eModels { mDog=0,
 			   MODELS_SIZE };

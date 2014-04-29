@@ -56,7 +56,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>lua5.1.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>lua5.1.lib;luabindd.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Daniel\Documents\GitHub\BodySnatcher\BodySnatcher\Physics\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -79,10 +79,13 @@
     <ClCompile Include="FirstPersonCamera.cpp" />
     <ClCompile Include="GameEngineCore.cpp" />
     <ClCompile Include="gameObject.cpp" />
+    <ClCompile Include="GameObjectDatabase.cpp" />
     <ClCompile Include="IOSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model3D.cpp" />
+    <ClCompile Include="ModelDatabase.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
+    <ClCompile Include="ModelManager.cpp" />
     <ClCompile Include="OpenGLGraphics.cpp" />
     <ClCompile Include="Terrain.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -95,12 +98,15 @@
     <ClInclude Include="FirstPersonCamera.h" />
     <ClInclude Include="GameEngineCore.h" />
     <ClInclude Include="gameObject.h" />
+    <ClInclude Include="GameObjectDatabase.h" />
     <ClInclude Include="ICamera.h" />
     <ClInclude Include="IGraphics.h" />
     <ClInclude Include="IInputOutput.h" />
     <ClInclude Include="IOSystem.h" />
     <ClInclude Include="Model3D.h" />
+    <ClInclude Include="ModelDatabase.h" />
     <ClInclude Include="ModelLoader.h" />
+    <ClInclude Include="ModelManager.h" />
     <ClInclude Include="OpenGLGraphics.h" />
     <ClInclude Include="Terrain.h" />
     <ClInclude Include="TextureManager.h" />

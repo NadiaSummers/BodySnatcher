@@ -27,7 +27,9 @@ private:
 public:	
 
 	TextureManager();
-	~TextureManager();	
+	~TextureManager();
+
+	void init();
 
 	/**
 		* @brief clear the memory / free the loaded textures

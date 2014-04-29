@@ -3,11 +3,17 @@
 
 TextureManager::TextureManager()
 {
+	init();
 }
 
 TextureManager::~TextureManager()
 {
 	clearMemory();
+}
+
+void TextureManager::init()
+{
+	//load in lua here?
 }
 
 void TextureManager::loadTexture(int position, const char* filename)

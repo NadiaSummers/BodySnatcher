@@ -32,7 +32,7 @@ glClearColor(0.0f, 0.1f, 0.1f, 1.0f);
 
 	gluPerspective(40, 1, 0, 10000);
 
-	gluLookAt(512, 1024, -256, 768, 512, 256, 0, 1, 0);
+	gluLookAt(512, 1024, -256, 768, 512, 768, 0, 1, 0);
 	//gluLookAt(128, 300, -192, 256, 256, 256, 0, 1, 0);
 	//gluLookAt(500, 200, 0, 500, 0, 500, 0, 1, 0);
 
@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 
 	lua_State *myLuaState = luaL_newstate();
 	luabind::open(myLuaState);
-
+	/*
 	luabind::module(myLuaState)
 	[
 		luabind::class_<Terrain>("Terrain")
@@ -108,7 +108,7 @@ int main(int argc, char **argv)
 		.def("generateTerrain", (void(Terrain::*)(GLuint, const char *, int)) &Terrain::generateTerrain) //because char * lol.
 		.def("addMapLayer", (void(Terrain::*)(GLuint, const char *))&Terrain::addMapLayer)				//requires explicit declaration
 	];
-
+	*/
 	luabind::module(myLuaState)
 	[
 		luabind::class_<TextureManager>("TextureManager")
@@ -117,19 +117,28 @@ int main(int argc, char **argv)
 		.def("getTexture", &TextureManager::getTexture)
 	];
 
-	luaL_dofile(myLuaState, "lua/levelone.lua");
+	//luaL_dofile(myLuaState, "lua/levelone.lua");
 
 	lua_close(myLuaState);
-	/*
+	
 	texManager.loadTexture(0, "textures/ground.png");
 	texManager.loadTexture(1, "textures/dirt.png");
 	texManager.loadTexture(2, "textures/cobble.png");
+	texManager.loadTexture(3, "textures/stone.png");
 	
-	newTerrain.setScalingFactor(16, 2, 16);
-	newTerrain.generateTerrain(texManager.getTexture(0), "textures/terrainheightmap.raw", 512);
-	newTerrain.addMapLayer(texManager.getTexture(1), "textures/tex-dirt512.raw");
-	newTerrain.addMapLayer(texManager.getTexture(2), "textures/tex-cobble512.raw");
-	*/
+	newTerrain.setScalingFactor(5, 2, 5);
+	
+	//set of 1024x1024 .raw files (upscaled to x5)
+	newTerrain.generateTerrain(texManager.getTexture(1), "textures/1024-heightmap.raw", 1024);
+	newTerrain.addMapLayer(texManager.getTexture(0), "textures/1024-grass.raw");
+	//newTerrain.addMapLayer(texManager.getTexture(1), "textures/1024-dirt.raw");
+	newTerrain.addMapLayer(texManager.getTexture(3), "textures/1024-road.raw");
+	newTerrain.addMapLayer(texManager.getTexture(2), "textures/1024-graveyardpath.raw");
+
+	//newTerrain.generateTerrain(texManager.getTexture(0), "textures/terrainheightmap.raw", 512);
+	//newTerrain.addMapLayer(texManager.getTexture(1), "textures/tex-dirt512.raw");
+	//newTerrain.addMapLayer(texManager.getTexture(2), "textures/tex-cobble512.raw");
+	
 
     glutMainLoop();
 

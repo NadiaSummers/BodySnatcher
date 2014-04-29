@@ -47,19 +47,19 @@ bool Terrain::doLua()
 		int scaleX = (int)lua_tonumber(luaState, 4);
 		int scaleY = (int)lua_tonumber(luaState, 5);
 		int scaleZ = (int)lua_tonumber(luaState, 6);
-
+		cout << "Terrain Lua loaded." << endl;
 	}
 	else
 	{
 		cout << "Error loading data." << endl;
-        system("pause");
 		return false;
 	}
 
 	//generateTerrain(texManager.getTextureID(baseTexture), heightmap, size);
 	setScalingFactor(scaleX, scaleY, scaleZ);
   
-    lua_close(luaState); 
+    lua_close(luaState);
+	return true;
 }
 
 bool Terrain::generateTerrain(GLuint texture, char *filename, int newSize)
@@ -169,7 +169,7 @@ void Terrain::setScalingFactor(float xScale, float yScale, float zScale)
 	scaleX = xScale;
 	scaleY = yScale;
 	scaleZ = zScale;
-	textureScale = scaleX / 2;
+	textureScale = scaleX;
 }
 
 int Terrain::getSize()
