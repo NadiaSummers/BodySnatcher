@@ -17,7 +17,10 @@
 #ifndef TERRAIN_H
 #define TERRAIN_H
 
+#include <string>
 #include <vector>
+
+using namespace std;
 
 class Terrain
 {
@@ -93,8 +96,8 @@ private:
 	float scaleY;
 	float scaleZ;
 	float textureScale;
-	std::vector <string> textures;
-	std::vector <unsigned char*> terrainData;
+	vector<string> textures;
+	vector<unsigned char*> terrainData;
 };
 
 #endif
