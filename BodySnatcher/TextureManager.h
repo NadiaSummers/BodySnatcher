@@ -1,35 +1,35 @@
 /**
  * @class TextureManager
- * @brief Controller class for the texture assets
+ * @brief Class to create and store textures.
  *
- * Implements the basic functions to work with texture files: init(), reload(), clearMemory(), getTextureID and a List to manage them
  *
- * @author Daniel Manganaro
- * @version 04
- * @date 11/04/2014 Daniel Manganaro - Basic Implementation
+ * @author Daniel Manganaro, Nadia Summers
+ * @version 03
+*  @date 11/04/2014 Daniel Manganaro - Basic Implementation
  * @date 23/04/2014 Nadia Summers - Updated to use a vector, removed crap, added openGL tex settings.
+ * @date 06/05/2014 Nadia Summers - Updated to use a map.
  */
 
-#pragma once
+#ifndef TEXTUREMANAGER_H
+#define TEXTUREMANAGER_H
 
+#include <iostream>
 #include <stdlib.h>
 #include <glut.h>
 #include <SOIL.h>
-#include <vector>
-
+#include <string>
+#include <map>
 
 
 class TextureManager {
 
 private:
-	std::vector <GLuint> mTextures;
+	std::map <std::string, GLuint> mTextures;
 
 public:	
 
 	TextureManager();
 	~TextureManager();
-
-	void init();
 
 	/**
 		* @brief clear the memory / free the loaded textures
@@ -39,17 +39,19 @@ public:
 	void clearMemory();
 
 	/**
-		* @brief Returns the Texture ID of the textures stored at position "texture" in the list the class holds 
-        * @param eTextures texture - represents the position / index of the requested texture in the array
-		* @return GLuint - the Texture ID, you can pass to the BindTexture()-function
+		* @brief Returns the Texture by matching with the ID in the map.
+        * @param string - The ID of the requested texture in the array.
+		* @return GLuint - The Texture.
 	*/
-	GLuint getTexture(int position) const;
+	GLuint getTexture(std::string ID) const;
 
 	/**
-	* @brief Loads the specified image into the mTexture vector.
-	* @param int position - Dummy, used for external lua housekeeping.
+	* @brief Loads the specified image into the mTexture map.
+	* @param string - The ID to be assigneed to this texture.
 	* @param const char * filename - The filename of the image to be loaded.
 	*/
-	void loadTexture(int position, const char* filename);
+	void loadTexture(std::string ID, const char* filename);
 
 };
+
+#endif

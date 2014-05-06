@@ -2,8 +2,16 @@
 * @class Terrain
 * @brief Class containing functions relevant to the creation and upkeep of a terrain.
 *
-* @version 1
-* @date 23/04/2014 Nadia Summers
+* @author Nadia Summers
+* @version 5
+*
+* @date 04/04/2014 Nadia Summers
+* @date 20/04/2014 Raymond Forster - Added get scale methods.
+* @date 21/04/2014 Nadia Summers - Added Terrain Blending w/ multiple map layers.
+* @date 30/04/2014 Nadia Summers - Updated to use a vector.
+* @date 06/05/2014 Nadia Summers - Removed storage of textures inside Terrain, now stores keys.
+*
+* @TODO Fix Syntax in render() - glBindTexture() needs to be able to call texture manager class.
 */
 
 #ifndef TERRAIN_H
@@ -32,7 +40,7 @@ public:
 	* @param const int size - The width/length of the heightmap image.
 	* @return Returns true if successful.
 	*/
-	bool generateTerrain(GLuint texture, char *filename, int size);
+	bool generateTerrain(std::string texture, char *filename, int size);
 	
 
 	/*
@@ -41,7 +49,7 @@ public:
 	* @param char *filename - The path/filename of the texture's alpha map.
 	* @return Returns true if successful.
 	*/
-	bool addMapLayer(GLuint texture, char *filename);
+	bool addMapLayer(std::string texture, char *filename);
 	
 	/*
 	* @brief Sets the scale of the terrain.
@@ -80,17 +88,12 @@ public:
 	bool inbounds(int xPos, int zPos);
 	
 private:
-	bool doLua();
-
-
 	int size;
-	//GLuint baseTexture;
-	//unsigned char *terrainData;
 	float scaleX;
 	float scaleY;
 	float scaleZ;
 	float textureScale;
-	std::vector <GLuint> textures;
+	std::vector <string> textures;
 	std::vector <unsigned char*> terrainData;
 };
 

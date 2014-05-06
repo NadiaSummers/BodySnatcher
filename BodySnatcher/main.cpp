@@ -17,12 +17,14 @@ extern "C"
 
 #include "Terrain.h"
 #include "TextureManager.h"
+#include "LuaManager.h"
 
 using namespace std;
 
 
 Terrain newTerrain;
 TextureManager texManager;
+LuaManager luaManager;
 
 void display(void)
 {
@@ -96,10 +98,10 @@ int main(int argc, char **argv)
 
 	//do stuffs!
 
-
+	/*
 	lua_State *myLuaState = luaL_newstate();
 	luabind::open(myLuaState);
-	/*
+	
 	luabind::module(myLuaState)
 	[
 		luabind::class_<Terrain>("Terrain")
@@ -108,7 +110,7 @@ int main(int argc, char **argv)
 		.def("generateTerrain", (void(Terrain::*)(GLuint, const char *, int)) &Terrain::generateTerrain) //because char * lol.
 		.def("addMapLayer", (void(Terrain::*)(GLuint, const char *))&Terrain::addMapLayer)				//requires explicit declaration
 	];
-	*/
+	
 	luabind::module(myLuaState)
 	[
 		luabind::class_<TextureManager>("TextureManager")
@@ -116,29 +118,33 @@ int main(int argc, char **argv)
 		.def("loadTexture", (void(TextureManager::*)(int, const char *))&TextureManager::loadTexture)
 		.def("getTexture", &TextureManager::getTexture)
 	];
-
+	
 	//luaL_dofile(myLuaState, "lua/levelone.lua");
 
 	lua_close(myLuaState);
+	*/
+
+
+	//texManager.loadTexture("grass", "textures/ground.png");
+	//texManager.loadTexture("dirt", "textures/dirt.png");
+	//texManager.loadTexture("cobble", "textures/cobble.png");
+	//texManager.loadTexture("stone", "textures/stone.png");
 	
-	texManager.loadTexture(0, "textures/ground.png");
-	texManager.loadTexture(1, "textures/dirt.png");
-	texManager.loadTexture(2, "textures/cobble.png");
-	texManager.loadTexture(3, "textures/stone.png");
-	
-	newTerrain.setScalingFactor(5, 2, 5);
+	//newTerrain.setScalingFactor(10, 4, 10);
 	
 	//set of 1024x1024 .raw files (upscaled to x5)
-	newTerrain.generateTerrain(texManager.getTexture(1), "textures/1024-heightmap.raw", 1024);
-	newTerrain.addMapLayer(texManager.getTexture(0), "textures/1024-grass.raw");
+	//newTerrain.generateTerrain(texManager.getTexture("dirt"), "textures/1024-heightmap.raw", 1024);
+	//newTerrain.addMapLayer(texManager.getTexture("grass"), "textures/1024-grass.raw");
 	//newTerrain.addMapLayer(texManager.getTexture(1), "textures/1024-dirt.raw");
-	newTerrain.addMapLayer(texManager.getTexture(3), "textures/1024-road.raw");
-	newTerrain.addMapLayer(texManager.getTexture(2), "textures/1024-graveyardpath.raw");
+	//newTerrain.addMapLayer(texManager.getTexture(3), "textures/1024-road.raw");
+	//newTerrain.addMapLayer(texManager.getTexture(2), "textures/1024-graveyardpath.raw");
 
 	//newTerrain.generateTerrain(texManager.getTexture(0), "textures/terrainheightmap.raw", 512);
 	//newTerrain.addMapLayer(texManager.getTexture(1), "textures/tex-dirt512.raw");
 	//newTerrain.addMapLayer(texManager.getTexture(2), "textures/tex-cobble512.raw");
 	
+	luaManager.doLuaFile("lua/levelone.lua");
+
 
     glutMainLoop();
 

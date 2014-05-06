@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <glut.h>
-#include <lua.hpp>
 
 #include "Terrain.h"
 
@@ -13,56 +12,10 @@ Terrain::Terrain()
 	scaleX = 1;
 	scaleY = 1;
 	scaleZ = 1;
-	doLua();
 }
 
-bool Terrain::doLua()
-{
-	lua_State* luaState = lua_open();
-    if (luaState == NULL)
-	{
-       cout << "Error Initializing lua." << endl;
-       return false;
-    }
 
-    //load lua functions
-    luaL_openlibs(luaState);
-
-	luaL_dofile(luaState, "lua/levelone-terraingen.lua");
-
-    lua_settop(luaState, 0);
-    lua_getglobal(luaState, "baseTexture");
-    lua_getglobal(luaState, "heightmap");
-	lua_getglobal(luaState, "size");
-	lua_getglobal(luaState, "scaleX");
-	lua_getglobal(luaState, "scaleY");
-	lua_getglobal(luaState, "scaleZ");
-
-	//check if numbers are actually numbers etc
-    if((lua_isnumber(luaState, 1)) && (lua_isstring(luaState, 2)) && (lua_isnumber(luaState, 3)) && (lua_isnumber(luaState, 4)) && (lua_isnumber(luaState, 5)) && (lua_isnumber(luaState, 6)))
-	{
-		int baseTexture = (int)lua_tonumber(luaState, 1);
-		string heightmap = (string)lua_tostring(luaState, 2);
-		int size = (int)lua_tonumber(luaState, 3);
-		int scaleX = (int)lua_tonumber(luaState, 4);
-		int scaleY = (int)lua_tonumber(luaState, 5);
-		int scaleZ = (int)lua_tonumber(luaState, 6);
-		cout << "Terrain Lua loaded." << endl;
-	}
-	else
-	{
-		cout << "Error loading data." << endl;
-		return false;
-	}
-
-	//generateTerrain(texManager.getTextureID(baseTexture), heightmap, size);
-	setScalingFactor(scaleX, scaleY, scaleZ);
-  
-    lua_close(luaState);
-	return true;
-}
-
-bool Terrain::generateTerrain(GLuint texture, char *filename, int newSize)
+bool Terrain::generateTerrain(string texture, char *filename, int newSize)
 {
 	textures.push_back(texture);
 	size = newSize;
@@ -90,7 +43,7 @@ bool Terrain::generateTerrain(GLuint texture, char *filename, int newSize)
 }
 
 
-bool Terrain::addMapLayer(GLuint texture, char *filename)
+bool Terrain::addMapLayer(string texture, char *filename)
 {
 	//add texture to end of vector
 	textures.push_back(texture);
@@ -119,6 +72,10 @@ bool Terrain::addMapLayer(GLuint texture, char *filename)
 }
 
 
+///***************************//
+// TODO: FIX DRAW ORDER		//
+//*****************************//
+
 void Terrain::render(void)
 {
 	//unsigned char heightColor;
@@ -126,10 +83,10 @@ void Terrain::render(void)
 
 	glColor4f(1.0, 1.0, 1.0, 1);
 
-
+	//need to render each terrain layer - 0 should be base and is treated differently
 	for (int i = 0; i < (int)textures.size(); i++)
 	{
-		glBindTexture(GL_TEXTURE_2D, textures[i]);
+		//glBindTexture(GL_TEXTURE_2D, textureManager.getTexture(textures[i]));			//FIX SYNTAX !!!//
 
 		for (int z = 0; z < getSize() -1; z++)
 		{
@@ -137,15 +94,18 @@ void Terrain::render(void)
 			glBegin(GL_TRIANGLE_STRIP);
 				for (int x = 0; x < getSize(); x++)
 				{
+					//dont render mapLayers triangles with an alpha of 0 - invisible anyways!
+					if (i > 0 && getTextureMapHeight(x, z , i) == 0)
+						break;
 
 					texLeft = (float)x / getSize() * textureScale;
 					texBottom = (float)z / getSize() * textureScale;
 					texTop = (float)(z + 1) / getSize() * textureScale;
 
-
+					//only want to set this for subsequent layers
 					if (i > 0)
 						glColor4f(1.0, 1.0, 1.0, getTextureMapHeight(x, z, i));
-
+					
 
 					//heightColor = getHeightColor(x, z);
 					//glColor3ub(heightColor, heightColor, heightColor);
@@ -157,6 +117,7 @@ void Terrain::render(void)
 					//glColor3ub(heightColor, heightColor, heightColor);
 					glTexCoord2f(texLeft, texTop);
 					glVertex3f((float)x * scaleX, getHeight(x, z + 1), (float)(z + 1) * scaleZ);
+					
 				}
 			glEnd();
 		}

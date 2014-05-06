@@ -81,6 +81,7 @@
     <ClCompile Include="gameObject.cpp" />
     <ClCompile Include="GameObjectDatabase.cpp" />
     <ClCompile Include="IOSystem.cpp" />
+    <ClCompile Include="LuaManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Model3D.cpp" />
     <ClCompile Include="ModelDatabase.cpp" />
@@ -103,6 +104,7 @@
     <ClInclude Include="IGraphics.h" />
     <ClInclude Include="IInputOutput.h" />
     <ClInclude Include="IOSystem.h" />
+    <ClInclude Include="LuaManager.h" />
     <ClInclude Include="Model3D.h" />
     <ClInclude Include="ModelDatabase.h" />
     <ClInclude Include="ModelLoader.h" />
