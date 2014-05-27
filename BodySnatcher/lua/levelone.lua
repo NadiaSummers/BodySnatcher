@@ -11,7 +11,7 @@ textures = {
 
 terrain = {
 	baseTexture = "dirt",
-	heightMap = "textures/terrainheightmap.raw",
+	heightMap = "textures/1024-heightmap.raw",
 	size = 1024,
 	scaleX = 16,
 	scaleY = 2,

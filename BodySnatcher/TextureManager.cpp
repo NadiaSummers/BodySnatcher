@@ -2,7 +2,7 @@
 
 
 
-TextureManager::TextureManager()
+TextureManager::TextureManager(GameEngineCore* engineCore):mEngineCore(engineCore)
 {
 }
 
@@ -21,7 +21,7 @@ void TextureManager::loadTexture(const std::string ID, const char* filename)
 
 	mTextures.insert(std::pair<std::string, GLuint>(ID, texture));
 
-	std::cout << "Loaded: " << ID << " - " << filename << "." << std::endl;
+	std::cout << "Tex: " << ID << " - " << filename << "." << std::endl;
 
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);

@@ -39,6 +39,7 @@ bool Terrain::generateTerrain(string texture, char *filename, int newSize)
 
 	terrainData.push_back(thisMap);
 	cout << "Terrain Added: " << filename << endl;
+
 	return true;
 }
 
@@ -47,8 +48,7 @@ bool Terrain::addMapLayer(string texture, char *filename)
 {
 	//add texture to end of vector
 	textures.push_back(texture);
-
-
+	
 	ifstream infile(filename, ios::binary);
 	if (!infile)
 	{
@@ -56,6 +56,7 @@ bool Terrain::addMapLayer(string texture, char *filename)
 		return false;
 	}	
 
+	//ARGH WTF WHY DOES THIS CRSAH!
 	unsigned char *thisMap = new unsigned char[size * size];
 
 	infile.seekg(0, ios::end);
@@ -66,8 +67,8 @@ bool Terrain::addMapLayer(string texture, char *filename)
 	infile.close();
 
 	terrainData.push_back(thisMap);
-
 	cout << "Terrain Layer [" <<  (int)terrainData.size() << "] Added: " << filename << endl;
+	
 	return true;
 }
 

@@ -22,20 +22,28 @@ extern "C"
 }
 
 #include "TextureManager.h"
+#include "GameEngineCore.h"
 
+class GameEngineCore;
 class LuaManager
 {
 public:
-	LuaManager();
+	LuaManager(GameEngineCore* engineCore);
 	~LuaManager();
 	bool doLuaFile(char *filename);
 
 private:
+	GameEngineCore* mEngineCore;
 	bool init();
 	lua_State* luaState;
 
 	int getLuaNumber(const char *key);
 	std::string getLuaString(const char *key);
+	char * convertToChar(string inputString);
+
+	bool doTextures();
+	bool doTerrain();
+	bool doTerrainLayers();
 };
 
 #endif 

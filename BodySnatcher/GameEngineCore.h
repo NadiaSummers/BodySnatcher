@@ -9,12 +9,16 @@
 #include "ModelDatabase.h"
 #include "OpenGLGraphics.h"
 #include "Terrain.h"
+#include "TextureManager.h"
+#include "LuaManager.h"
 
 class GameObjectDatabase;
 class FirstPersonCamera;
 class IOSystem;
 class ModelDatabase;
 class OpenGLGraphics;
+class TextureManager;
+class LuaManager;
 class GameEngineCore
 {
 	private:
@@ -27,6 +31,8 @@ class GameEngineCore
 		OpenGLGraphics* mGraphicsEngine;
 		IOSystem* mIOSystem;
 		Terrain* mTerrainEngine;
+		TextureManager* mTextureManager;
+		LuaManager* mLuaManager;
 
 	public:
 		static GameEngineCore* GetInstance();
@@ -43,6 +49,8 @@ class GameEngineCore
 		IOSystem GetIOSystem();
 		ModelDatabase GetModelDatabase();
 		Terrain GetTerrainEngine();
+		TextureManager GetTextureManager();
+		LuaManager GetLuaManager();
 
 		void SpecialKey(int key, int x, int y);
 };

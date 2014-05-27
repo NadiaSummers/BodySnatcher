@@ -20,15 +20,18 @@
 #include <string>
 #include <map>
 
+#include "GameEngineCore.h"
 
+class GameEngineCore;
 class TextureManager {
 
 private:
 	std::map <std::string, GLuint> mTextures;
+	GameEngineCore* mEngineCore;
 
 public:	
 
-	TextureManager();
+	TextureManager(GameEngineCore* engineCore);
 	~TextureManager();
 
 	/**
