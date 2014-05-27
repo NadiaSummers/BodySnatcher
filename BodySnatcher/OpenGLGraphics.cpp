@@ -68,7 +68,7 @@ void OpenGLGraphics::RenderTerrain(Terrain *t)
 	//need to render each terrain layer - 0 should be base and is treated differently
 	for (int i = 0; i < t->getNumLayers(); i++)
 	{
-		glBindTexture(GL_TEXTURE_2D, mEngineCore->GetTextureManager().getTexture(t->getTextureName(i)));
+		//glBindTexture(GL_TEXTURE_2D, mEngineCore->GetTextureManager().getTexture("cobble"));
 
 		for (int z = 0; z < t->getSize() -1; z++)
 		{

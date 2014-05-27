@@ -22,11 +22,8 @@ void TextureManager::loadTexture(const string ID, const char* filename)
 
 	mTextures.insert(pair<string, GLuint>(ID, texture));
 
-<<<<<<< HEAD
+
 	cout << "Tex: " << ID << " - " << filename << "." << endl;
-=======
-	std::cout << "Loaded: " << ID << " - " << filename << "." << std::endl;
->>>>>>> parent of 94baa49... Stuffs
 
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
@@ -34,6 +31,8 @@ void TextureManager::loadTexture(const string ID, const char* filename)
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 	glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+
+	mTextures.insert(pair<string, GLuint>(ID, texture));
 }
 
 GLuint TextureManager::getTexture(string ID) const

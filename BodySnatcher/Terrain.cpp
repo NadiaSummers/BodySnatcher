@@ -75,7 +75,7 @@ bool Terrain::addMapLayer(string texture, char *filename)
 ///***************************//
 // TODO: FIX DRAW ORDER		//
 //*****************************//
-/*
+
 void Terrain::render(void)
 {
 	//unsigned char heightColor;
@@ -86,7 +86,7 @@ void Terrain::render(void)
 	//need to render each terrain layer - 0 should be base and is treated differently
 	for (int i = 0; i < (int)textures.size(); i++)
 	{
-		glBindTexture(GL_TEXTURE_2D, mEngineCore->GetTextureManager().getTexture(textures[i]));			//FIX SYNTAX !!!//
+		//glBindTexture(GL_TEXTURE_2D, mEngineCore->GetTextureManager().getTexture(textures[i]));			//FIX SYNTAX !!!//
 
 		for (int z = 0; z < getSize() -1; z++)
 		{
@@ -123,7 +123,7 @@ void Terrain::render(void)
 		}
 	}
 }
-*/
+
 
 //NS - should probably also scale the texture coord mapping here too.
 

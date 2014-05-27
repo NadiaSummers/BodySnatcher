@@ -35,7 +35,7 @@ public:
 	/*
 	* @brief Method for rendering the terrain, given respect to heightmaps/textures/texturemaps.
 	*/
-	//void render();
+	void render();
 	
 	/*
 	* @brief Used during initialization, reads in heightmap.
