@@ -34,11 +34,17 @@ void GameEngineCore::Initialise()
 {
 	mGraphicsEngine->Initialise();
 	mCamera->Initialise();
-	mLuaManager->doLuaFile("lua/levelone.lua");
-	//mTerrainEngine->generateTerrain("dirt", "textures/1024-heightmap.raw", 1024);
+	//mLuaManager->doLuaFile("lua/levelone.lua");
+	
+	mTextureManager->loadTexture("dirt", "textures/dirt.png");
+	
+	//because loadign via lua crashes in addMapLayer :S
+	mTerrainEngine->generateTerrain("dirt", "textures/1024-heightmap.raw", 1024);
+	
 	//mTerrainEngine->addMapLayer("grass", "textures/1024-grass.raw");
 	//mTerrainEngine->addMapLayer("cobble", "textures/1024-graveyardpath.raw");
-
+	//mTerrainEngine->addMapLayer("stone", "textures/1024-road.raw");
+	
 }
 
 
@@ -57,14 +63,15 @@ void GameEngineCore::Draw()
 
 	gluLookAt(512, 1024, -256, 768, 512, 256, 0, 1, 0);
 
-	glBindTexture(GL_TEXTURE_2D, GetTextureManager().getTexture("grass"));	
-	
+	mGraphicsEngine->RenderTerrain(mTerrainEngine);
+
+	/*
 	glBegin(GL_QUADS);
 		glTexCoord2f (0.0, 0.0);		glVertex3f (0.0, 0.0, 0.0);
 		glTexCoord2f (1.0, 0.0);		glVertex3f (1000.0, 0.0, 0.0);
 		glTexCoord2f (1.0, 1.0);		glVertex3f (1000.0, 0, 1000.0);
 		glTexCoord2f (0.0, 1.0);		glVertex3f (0.0, 0, 1000.0);
-	glEnd();
+	glEnd();*/
 
 	glFlush();
 	glutSwapBuffers();

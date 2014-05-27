@@ -57,35 +57,52 @@ void OpenGLGraphics::RenderScene()
 {
 }
 
-
+//*NS check draw order of layers
 void OpenGLGraphics::RenderTerrain(Terrain *t)
 {
-	cout << "method called: OpenGLGraphics::RenderTerrain(Terrain *t)" << endl;
-	
-	unsigned char heightColor;
+	//unsigned char heightColor;
 	float texLeft, texBottom, texTop;
 
-	for (int z = 0; z < t->getSize() -1; z++)
+	glColor4f(1.0, 1.0, 1.0, 1);
+
+	//need to render each terrain layer - 0 should be base and is treated differently
+	for (int i = 0; i < t->getNumLayers(); i++)
 	{
-		glBegin(GL_TRIANGLE_STRIP);
-			for (int x = 0; x < t->getSize(); x++)
-			{
-				texLeft = (float)x / t->getSize();
-				texBottom = (float)z / t->getSize();
-				texTop = (float)(z + 1) / t->getSize();
+		glBindTexture(GL_TEXTURE_2D, mEngineCore->GetTextureManager().getTexture(t->getTextureName(i)));
+
+		for (int z = 0; z < t->getSize() -1; z++)
+		{
+			
+			glBegin(GL_TRIANGLE_STRIP);
+				for (int x = 0; x < t->getSize(); x++)
+				{
+					//dont render mapLayers triangles with an alpha of 0 - invisible anyways!
+					if (i > 0 && t->getTextureMapHeight(x, z , i) == 0)
+						break;
+
+					texLeft = (float)x / t->getSize() * t->getTextureScale();
+					texBottom = (float)z / t->getSize() * t->getTextureScale();
+					texTop = (float)(z + 1) / t->getSize() * t->getTextureScale();
+
+					//only want to set this for subsequent layers
+					if (i > 0)
+						glColor4f(1.0, 1.0, 1.0, t->getTextureMapHeight(x, z, i));
+					
+
+					//heightColor = getHeightColor(x, z);
+					//glColor3ub(heightColor, heightColor, heightColor);
+					glTexCoord2f(texLeft, texBottom);
+					glVertex3f((float)x * t->GetScaleX(), t->getHeight(x, z), (float)z * t->GetScaleZ());
 
 
-				heightColor = t->getHeightColor(x, z);
-				glColor3ub(heightColor, heightColor, heightColor);
-				glTexCoord2f(texLeft, texBottom);
-				glVertex3f((float)x * t->GetScaleX(), t->getHeight(x, z), (float)z * t->GetScaleZ());
-				
-				heightColor = t->getHeightColor(x, z + 1);
-				glColor3ub(heightColor, heightColor, heightColor);
-				glTexCoord2f(texLeft, texTop);
-				glVertex3f((float)x * t->GetScaleX(), t->getHeight(x, z + 1), (float)(z + 1) * t->GetScaleZ());
-			}
-		glEnd();
+					//heightColor = getHeightColor(x, z + 1);
+					//glColor3ub(heightColor, heightColor, heightColor);
+					glTexCoord2f(texLeft, texTop);
+					glVertex3f((float)x * t->GetScaleX(), t->getHeight(x, z + 1), (float)(z + 1) * t->GetScaleZ());
+					
+				}
+			glEnd();
+		}
 	}
 }
 

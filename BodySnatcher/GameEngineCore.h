@@ -19,6 +19,7 @@ class ModelDatabase;
 class OpenGLGraphics;
 class TextureManager;
 class LuaManager;
+class Terrain;
 class GameEngineCore
 {
 	private:

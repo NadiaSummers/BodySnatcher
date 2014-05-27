@@ -38,8 +38,8 @@ bool LuaManager::doLuaFile(char *filename)
 	}
 
 	doTextures();		cout << "-----------------------" << endl;
-	doTerrain();		cout << "-----------------------" << endl;
-	doTerrainLayers();		cout << "-----------------------" << endl;
+	//doTerrain();		cout << "-----------------------" << endl;
+	//doTerrainLayers();		cout << "-----------------------" << endl;
 	
 	cout << "Lua: " << filename << " successful." << endl;
 	return true;

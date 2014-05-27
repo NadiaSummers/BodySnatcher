@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 
+
 using namespace std;
 
 class Terrain
@@ -34,7 +35,7 @@ public:
 	/*
 	* @brief Method for rendering the terrain, given respect to heightmaps/textures/texturemaps.
 	*/
-	void render();
+	//void render();
 	
 	/*
 	* @brief Used during initialization, reads in heightmap.
@@ -54,6 +55,8 @@ public:
 	*/
 	bool addMapLayer(std::string texture, char *filename);
 	
+	int getNumLayers(void);
+
 	/*
 	* @brief Sets the scale of the terrain.
 	* @ Also sets the textureScale based off scaleX.
@@ -89,6 +92,8 @@ public:
 	unsigned char getHeightColor(int xPos, int zPos);
 	float getTextureMapHeight(int xPos, int zPos, int mapNum);
 	bool inbounds(int xPos, int zPos);
+
+	std::string getTextureName(int pos);
 	
 private:
 	int size;
