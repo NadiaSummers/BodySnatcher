@@ -77,7 +77,7 @@ bool Terrain::addMapLayer(string texture, char *filename)
 //*****************************//
 
 void Terrain::render(void)
-{
+{/*
 	//unsigned char heightColor;
 	float texLeft, texBottom, texTop;
 
@@ -121,7 +121,7 @@ void Terrain::render(void)
 				}
 			glEnd();
 		}
-	}
+	}*/
 }
 
 

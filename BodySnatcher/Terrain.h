@@ -55,7 +55,7 @@ public:
 	*/
 	bool addMapLayer(std::string texture, char *filename);
 	
-	int getNumLayers(void);
+	int getNumLayers();
 
 	/*
 	* @brief Sets the scale of the terrain.

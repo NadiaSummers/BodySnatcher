@@ -10,6 +10,7 @@
 #include "OpenGLGraphics.h"
 #include "Terrain.h"
 #include "TextureManager.h"
+#include "LuaManager.h"
 
 class GameObjectDatabase;
 class FirstPersonCamera;
@@ -20,6 +21,7 @@ class OpenGLGraphics;
 class TextureManager;
 class LuaManager;
 class Terrain;
+class LuaManager;
 
 class GameEngineCore
 {
@@ -34,6 +36,7 @@ class GameEngineCore
 		IOSystem* mIOSystem;
 		Terrain* mTerrainEngine;
 		TextureManager* mTextureManager;
+		LuaManager* mLuaManager;
 
 	public:
 		static GameEngineCore* GetInstance();
@@ -51,6 +54,7 @@ class GameEngineCore
 		ModelDatabase GetModelDatabase();
 		Terrain GetTerrainEngine();
 		TextureManager GetTextureManager();
+		LuaManager GetLuaManager();
 
 		void SpecialKey(int key, int x, int y);
 };

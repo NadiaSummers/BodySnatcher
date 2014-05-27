@@ -36,16 +36,7 @@ void Init(int argc, char **argv)
 	glutInitWindowSize(1024,768);
 	glutCreateWindow("");
 
-	//needed for textures and alpha channel blending
-	glEnable(GL_TEXTURE_2D);                     
-    glShadeModel(GL_SMOOTH);               
-    glClearColor(0.0f, 0.0f, 0.0f, 0.5f);            
-    glClearDepth(1.0f);                   
-    glEnable(GL_DEPTH_TEST);                   
-    glDepthFunc(GL_LEQUAL);                   
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glEnable(GL_BLEND);
+
 
 	//set glut events:
 	glutIgnoreKeyRepeat(1);
@@ -58,6 +49,21 @@ void Init(int argc, char **argv)
 	glutMouseFunc(Mouse);
 	glutMotionFunc(MouseMotion);
 	glutReshapeFunc(Reshape);
+
+
+	//needed for textures and alpha channel blending
+	glEnable(GL_TEXTURE_2D);  
+    glShadeModel(GL_SMOOTH);               
+    glClearColor(0.0f, 0.0f, 0.0f, 0.5f);            
+    glClearDepth(1.0f);                   
+    glEnable(GL_DEPTH_TEST);                   
+    glDepthFunc(GL_LEQUAL);                   
+    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+
+
+
 	glutMainLoop();
 }
 

@@ -37,8 +37,8 @@ bool LuaManager::doLuaFile(char *filename)
 		return false;
 	}
 
-	doTextures();		cout << "-----------------------" << endl;
-	//doTerrain();		cout << "-----------------------" << endl;
+	doTextures();				cout << "-----------------------" << endl;
+	//doTerrain();				cout << "-----------------------" << endl;
 	//doTerrainLayers();		cout << "-----------------------" << endl;
 	
 	cout << "Lua: " << filename << " successful." << endl;
@@ -68,6 +68,7 @@ string LuaManager::getLuaString(const char *key)
 	return result;
 }
 
+
 char * LuaManager::convertToChar(string inputString)
 {
 	char * cString = new char[inputString.size() + 1];
@@ -75,6 +76,7 @@ char * LuaManager::convertToChar(string inputString)
 	cString[inputString.size()] = '\0';
 	return cString;
 }
+
 
 bool LuaManager::doTextures()
 {
@@ -109,8 +111,9 @@ bool LuaManager::doTextures()
 
 		for (int i = 0; i < textureNames.size(); i++)
 		{
-			mEngineCore->GetTextureManager().loadTexture(textureNames[i], convertToChar(textureFilenames[i]));
+			//mEngineCore->GetTextureManager().loadTexture(textureNames[i], convertToChar(textureFilenames[i]));
 		}
+		mEngineCore->GetTextureManager().loadTexture("dirt", "textures/dirt.png");
 		return true;
 	}
 	else

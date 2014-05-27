@@ -34,6 +34,7 @@ public:
 
 private:
 	GameEngineCore* mEngineCore;
+
 	bool init();
 	lua_State* luaState;
 
