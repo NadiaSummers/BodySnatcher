@@ -5,7 +5,7 @@
 * @author Nadia Summers
 * @version 5
 *
-* @date 04/04/2014 Nadia Summers - Initial implementation.
+* @date 04/04/2014 Nadia Summers
 * @date 20/04/2014 Raymond Forster - Added get scale methods.
 * @date 21/04/2014 Nadia Summers - Added Terrain Blending w/ multiple map layers.
 * @date 30/04/2014 Nadia Summers - Updated to use a vector.

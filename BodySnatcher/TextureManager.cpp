@@ -3,7 +3,7 @@
 using namespace std;
 
 
-TextureManager::TextureManager(GameEngineCore* engineCore):mEngineCore(engineCore)
+TextureManager::TextureManager()
 {
 }
 
@@ -22,7 +22,11 @@ void TextureManager::loadTexture(const string ID, const char* filename)
 
 	mTextures.insert(pair<string, GLuint>(ID, texture));
 
+<<<<<<< HEAD
 	cout << "Tex: " << ID << " - " << filename << "." << endl;
+=======
+	std::cout << "Loaded: " << ID << " - " << filename << "." << std::endl;
+>>>>>>> parent of 94baa49... Stuffs
 
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);

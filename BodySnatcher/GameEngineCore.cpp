@@ -10,10 +10,6 @@ GameEngineCore::GameEngineCore()
 	mIOSystem = new IOSystem(this);
 	mTerrainEngine = new Terrain();
 	mModelDatabase = new ModelDatabase();
-	mTextureManager = new TextureManager(this);
-	mLuaManager = new LuaManager(this);
-
-	Initialise();
 }
 
 
@@ -34,6 +30,7 @@ void GameEngineCore::Initialise()
 {
 	mGraphicsEngine->Initialise();
 	mCamera->Initialise();
+<<<<<<< HEAD
 	//mLuaManager->doLuaFile("lua/levelone.lua");
 	
 	mTextureManager->loadTexture("dirt", "textures/dirt.png");
@@ -45,6 +42,9 @@ void GameEngineCore::Initialise()
 	//mTerrainEngine->addMapLayer("cobble", "textures/1024-graveyardpath.raw");
 	//mTerrainEngine->addMapLayer("stone", "textures/1024-road.raw");
 	
+=======
+
+>>>>>>> parent of 94baa49... Stuffs
 }
 
 
@@ -55,6 +55,7 @@ void GameEngineCore::Update()
 
 void GameEngineCore::Draw()
 {
+<<<<<<< HEAD
 	glClearColor(0.0f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glLoadIdentity();
@@ -75,6 +76,8 @@ void GameEngineCore::Draw()
 
 	glFlush();
 	glutSwapBuffers();
+=======
+>>>>>>> parent of 94baa49... Stuffs
 }
 
 GameObjectDatabase GameEngineCore::GetGameObjectDatabase()
@@ -112,15 +115,6 @@ ModelDatabase GameEngineCore::GetModelDatabase()
 	return *mModelDatabase;
 }
 
-TextureManager GameEngineCore::GetTextureManager()
-{
-	return *mTextureManager;
-}
-
-LuaManager GameEngineCore::GetLuaManager()
-{
-	return *mLuaManager;
-}
 
 void GameEngineCore::SpecialKey(int key, int x, int y)
 {

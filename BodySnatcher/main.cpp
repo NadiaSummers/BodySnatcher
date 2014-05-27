@@ -2,6 +2,9 @@
 #include <glut.h>
 #include <iostream>
 #include <time.h>
+#include <SOIL.h>
+#include <lua.hpp>
+//#include "Terrain.h"
 
 #include "GameEngineCore.h"
 
@@ -29,9 +32,9 @@ void Init(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(1024, 768);
-	glutCreateWindow("BodySnatcher");
+	glutInitWindowPosition(100,100);
+	glutInitWindowSize(1024,768);
+	glutCreateWindow("");
 
 	//needed for textures and alpha channel blending
 	glEnable(GL_TEXTURE_2D);                     
@@ -158,6 +161,24 @@ void Reshape(int w, int h)
 //void input(unsigned char key, int x, int y)
 //{
 //}
+//
+////*NS temp
+//void loadTexture(char* filename)
+//{
+//	GLuint texture = SOIL_load_OGL_texture(filename, SOIL_LOAD_AUTO, SOIL_CREATE_NEW_ID, SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT);
+//	
+//    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);
+//
+//	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+//	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+//	glTexEnvi( GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE );
+//	glBindTexture(GL_TEXTURE_2D, texture);
+//	textures[texCount] = texture;
+//	texCount++;
+//}
+//
+//
 //
 //int main(int argc, char **argv)
 //{

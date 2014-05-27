@@ -2,7 +2,7 @@
 
 using namespace std;
 
-LuaManager::LuaManager(GameEngineCore* engineCore):mEngineCore(engineCore)
+LuaManager::LuaManager()
 {
 	init();
 }
@@ -37,6 +37,7 @@ bool LuaManager::doLuaFile(char *filename)
 		return false;
 	}
 
+<<<<<<< HEAD
 	doTextures();		cout << "-----------------------" << endl;
 	//doTerrain();		cout << "-----------------------" << endl;
 	//doTerrainLayers();		cout << "-----------------------" << endl;
@@ -78,97 +79,115 @@ char * LuaManager::convertToChar(string inputString)
 
 bool LuaManager::doTextures()
 {
+=======
+	//*********************//
+	//		TEXTURES	   //
+	//*********************//
+>>>>>>> parent of 94baa49... Stuffs
 	lua_getglobal(luaState, "textures");
 
 	if (lua_istable(luaState, -1))
 	{
 		lua_pushnil(luaState);
 
-		//*NS Not a great way to do this, but does work. Has to store mutliple sets of 2. [a][1] [b][2] etc.
-		vector <string> textureNames;
-		vector <string> textureFilenames;
-		bool flipflop = true;
+		//should expand or use dynamic container - needs to be twice the amount of textures
+		vector <string> texStrings;
 
 			while(lua_next(luaState, -2))
 			{
 				if (lua_isstring(luaState, -1))
 				{
-					if (flipflop)
-						textureNames.push_back((string)lua_tostring(luaState, -1));
-					else
-						textureFilenames.push_back((string)lua_tostring(luaState, -1));
-
-					flipflop = ! flipflop;
+					texStrings.push_back((string)lua_tostring(luaState, -1));
 				}
 				lua_pop(luaState, 1);
+
 			}
 		lua_pop(luaState, 1);
 
-		if (textureNames.size() != textureFilenames.size())
-			cout << "Lua Error: Texture Sets Mismatch!" << endl;
-
-		for (int i = 0; i < textureNames.size(); i++)
+		for (int j = 0; j < texStrings.size(); j = j + 2)
 		{
-			mEngineCore->GetTextureManager().loadTexture(textureNames[i], convertToChar(textureFilenames[i]));
+			cout << texStrings[j] << " - " << texStrings[j + 1] << endl;
+			//texManager.loadTexture(texName[j], texName[j + 1]);
+			//CALL TEXTURE MANAGER LOAD METHOD HERE.
 		}
-		return true;
-	}
-	else
-		return false;
-}
 
-bool LuaManager::doTerrain()
-{
+		cout << "-----------------------" << endl;
+	}
+
+	//*********************//
+	//		TERRAIN		   //
+	//*********************//
 	lua_getglobal(luaState, "terrain");
 	if (lua_istable(luaState, -1))
 	{
-		mEngineCore->GetTerrainEngine().generateTerrain(getLuaString("baseTexture"), convertToChar(getLuaString("heightMap")), getLuaNumber("size"));
-		mEngineCore->GetTerrainEngine().setScalingFactor(getLuaNumber("scaleX"), getLuaNumber("scaleY"), getLuaNumber("scaleZ"));
-		return true;
-	}
-	else
-		return false;
-}
+		cout << getLuaNumber("size") << endl;
+		cout << getLuaString("baseTexture") << endl;
+		cout << getLuaString("heightMap") << endl;
+		cout << "scale: " << getLuaNumber("scaleX") << ", " << getLuaNumber("scaleY") << ", " << getLuaNumber("scaleZ") << endl;
 
-bool LuaManager::doTerrainLayers()
-{
+		//TERRAIN GENERATION CALL HERE
+		cout << "-----------------------" << endl;
+	}
+	
+
+	//*********************//
+	//		MAPLAYERS	   //
+	//*********************//
 	lua_getglobal(luaState, "terrainLayers");
 
 	if (lua_istable(luaState, -1))
 	{
 		lua_pushnil(luaState);
 
-		vector <string> textures;
-		vector <string> filenames;
-		bool flipflop = true;
+		//should expand or use dynamic container - needs to be twice the amount of textures
+		vector <string> layerStrings;
 
 			while(lua_next(luaState, -2))
 			{
 				if (lua_isstring(luaState, -1))
 				{
-					if (flipflop)
-						textures.push_back((string)lua_tostring(luaState, -1));
-					else
-						filenames.push_back((string)lua_tostring(luaState, -1));
-					
-					flipflop = ! flipflop;
+					layerStrings.push_back((string)lua_tostring(luaState, -1));
 				}
 				lua_pop(luaState, 1);
 
 			}
 		lua_pop(luaState, 1);
 
-		if (textures.size() != filenames.size())
-			cout << "Lua Error: Terrain Layers Mismatch!" << endl;
-
-		for (int i = 0; i < textures.size(); i++)
+		for (int j = 0; j < layerStrings.size(); j = j + 2)
 		{
-			cout << "Lua: " << i << " " << textures[i] << ", " << convertToChar(filenames[i]) << endl;
-			mEngineCore->GetTerrainEngine().addMapLayer(textures[i], convertToChar(filenames[i]));
+			cout << layerStrings[j] << " - " << layerStrings[j + 1] << endl;
+			//terrain.addMapLayer(layerStrings[j], layerStrings[j + 1]);
+			//TERRAIN ADD MAP LAYERS HERE
 		}
-		//mEngineCore->GetTerrainEngine().addMapLayer("grass", "textures/1024-grass.raw");
-		return true;
+
+		cout << "-----------------------" << endl << endl;
 	}
-	else
-		return false;
+
+
+	cout << "Lua: " << filename << " successful." << endl;
+	return true;
 }
+
+int LuaManager::getLuaNumber(const char *key)
+{
+	int result;
+	lua_pushstring(luaState, key);
+	lua_gettable(luaState, -2);
+
+	result = (int)lua_tonumber(luaState, -1);
+	lua_pop(luaState, 1);
+	return result;
+}
+
+
+string LuaManager::getLuaString(const char *key)
+{
+	string result;
+	lua_pushstring(luaState, key);
+	lua_gettable(luaState, -2);
+
+	result = (string)lua_tostring(luaState, -1);
+	lua_pop(luaState, 1);
+	return result;
+}
+
