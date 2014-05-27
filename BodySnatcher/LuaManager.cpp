@@ -4,17 +4,16 @@ using namespace std;
 
 LuaManager::LuaManager(GameEngineCore* engineCore):mEngineCore(engineCore)
 {
-	init();
 }
 
 LuaManager::~LuaManager()
 {
-	lua_close(luaState);
 }
 
 
-bool LuaManager::init()
+bool LuaManager::doLuaFile(char *filename)
 {
+	lua_State* luaState;
 	//create lua state
 	luaState = lua_open();
 	if (luaState == NULL)
@@ -25,27 +24,28 @@ bool LuaManager::init()
 
 	//load lua functions
 	luaL_openlibs(luaState);
-	return true;
-}
 
 
-bool LuaManager::doLuaFile(char *filename)
-{
+
 	if (luaL_dofile(luaState, filename))
 	{
 		cout << "Lua: Problem with " << filename << endl;
 		return false;
 	}
 
-	doTextures();				cout << "-----------------------" << endl;
-	//doTerrain();				cout << "-----------------------" << endl;
-	//doTerrainLayers();		cout << "-----------------------" << endl;
+	
+	mEngineCore->GetTextureManager().loadTexture("dirt", "textures/dirt.png");
+	//doTextures(luaState);				cout << "-----------------------" << endl;
+	//doTerrain(luaState);				cout << "-----------------------" << endl;
+	//doTerrainLayers(luaState);		cout << "-----------------------" << endl;
 	
 	cout << "Lua: " << filename << " successful." << endl;
+
+	lua_close(luaState);
 	return true;
 }
 
-int LuaManager::getLuaNumber(const char *key)
+int LuaManager::getLuaNumber(const char *key, lua_State* luaState)
 {
 	int result;
 	lua_pushstring(luaState, key);
@@ -57,7 +57,7 @@ int LuaManager::getLuaNumber(const char *key)
 }
 
 
-string LuaManager::getLuaString(const char *key)
+string LuaManager::getLuaString(const char *key, lua_State* luaState)
 {
 	string result;
 	lua_pushstring(luaState, key);
@@ -78,7 +78,7 @@ char * LuaManager::convertToChar(string inputString)
 }
 
 
-bool LuaManager::doTextures()
+bool LuaManager::doTextures(lua_State* luaState)
 {
 	lua_getglobal(luaState, "textures");
 
@@ -109,31 +109,31 @@ bool LuaManager::doTextures()
 		if (textureNames.size() != textureFilenames.size())
 			cout << "Lua Error: Texture Sets Mismatch!" << endl;
 
-		for (int i = 0; i < textureNames.size(); i++)
+		for (int i = 0; i < (int)textureNames.size(); i++)
 		{
-			//mEngineCore->GetTextureManager().loadTexture(textureNames[i], convertToChar(textureFilenames[i]));
+			mEngineCore->GetTextureManager().loadTexture(textureNames[i], convertToChar(textureFilenames[i]));
 		}
-		mEngineCore->GetTextureManager().loadTexture("dirt", "textures/dirt.png");
+		
 		return true;
 	}
 	else
 		return false;
 }
 
-bool LuaManager::doTerrain()
+bool LuaManager::doTerrain(lua_State* luaState)
 {
 	lua_getglobal(luaState, "terrain");
 	if (lua_istable(luaState, -1))
 	{
-		mEngineCore->GetTerrainEngine().generateTerrain(getLuaString("baseTexture"), convertToChar(getLuaString("heightMap")), getLuaNumber("size"));
-		mEngineCore->GetTerrainEngine().setScalingFactor(getLuaNumber("scaleX"), getLuaNumber("scaleY"), getLuaNumber("scaleZ"));
+		mEngineCore->GetTerrainEngine().generateTerrain(getLuaString("baseTexture", luaState), convertToChar(getLuaString("heightMap", luaState)), getLuaNumber("size", luaState));
+		mEngineCore->GetTerrainEngine().setScalingFactor(getLuaNumber("scaleX", luaState), getLuaNumber("scaleY", luaState), getLuaNumber("scaleZ", luaState));
 		return true;
 	}
 	else
 		return false;
 }
 
-bool LuaManager::doTerrainLayers()
+bool LuaManager::doTerrainLayers(lua_State* luaState)
 {
 	lua_getglobal(luaState, "terrainLayers");
 
@@ -164,7 +164,7 @@ bool LuaManager::doTerrainLayers()
 		if (textures.size() != filenames.size())
 			cout << "Lua Error: Terrain Layers Mismatch!" << endl;
 
-		for (int i = 0; i < textures.size(); i++)
+		for (int i = 0; i < (int)textures.size(); i++)
 		{
 			cout << "Lua: " << i << " " << textures[i] << ", " << convertToChar(filenames[i]) << endl;
 			mEngineCore->GetTerrainEngine().addMapLayer(textures[i], convertToChar(filenames[i]));

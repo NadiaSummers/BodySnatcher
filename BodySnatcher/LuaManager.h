@@ -20,9 +20,9 @@ extern "C"
     #include "lualib.h"
     #include "lauxlib.h"
 }
-
-#include "TextureManager.h"
 #include "GameEngineCore.h"
+
+
 
 class GameEngineCore;
 class LuaManager
@@ -36,15 +36,14 @@ private:
 	GameEngineCore* mEngineCore;
 
 	bool init();
-	lua_State* luaState;
 
-	int getLuaNumber(const char *key);
-	std::string getLuaString(const char *key);
+	int getLuaNumber(const char *key, lua_State* luaState);
+	std::string getLuaString(const char *key, lua_State* luaState);
 	char * convertToChar(string inputString);
 
-	bool doTextures();
-	bool doTerrain();
-	bool doTerrainLayers();
+	bool doTextures(lua_State* luaState);
+	bool doTerrain(lua_State* luaState);
+	bool doTerrainLayers(lua_State* luaState);
 };
 
 #endif 

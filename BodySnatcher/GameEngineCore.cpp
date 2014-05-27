@@ -37,12 +37,16 @@ void GameEngineCore::Initialise()
 
 	mLuaManager->doLuaFile("lua/levelone.lua");
 
-	/*
-	mTextureManager->loadTexture("cobble", "textures/cobble.png");
-	mTextureManager->loadTexture("dirt", "textures/dirt.png");
-	mTextureManager->loadTexture("grass", "textures/ground.png");
-	mTextureManager->loadTexture("stone", "textures/stone.png");
-	*/
+	//mTextureManager->loadTexture("dirt", "textures/dirt.png");
+
+	cout << "dirt id: " << mTextureManager->getTexture("dirt") << endl;
+	
+
+
+	//mTextureManager->loadTexture("cobble", "textures/cobble.png");
+	//mTextureManager->loadTexture("grass", "textures/ground.png");
+	//mTextureManager->loadTexture("stone", "textures/stone.png");
+	
 	
 	//because loadign via lua crashes in addMapLayer :S
 	mTerrainEngine->generateTerrain("dirt", "textures/1024-heightmap.raw", 1024);
@@ -72,19 +76,19 @@ void GameEngineCore::Draw()
 
 	gluLookAt(2048, 2048, -2048, 2048, 512, 2048, 0, 1, 0);
 
-	mGraphicsEngine->RenderTerrain(mTerrainEngine);
+	//mGraphicsEngine->RenderTerrain(mTerrainEngine);
 
-	//glBindTexture(GL_TEXTURE_2D, mTextureManager->getTexture("cobble"));
+	glBindTexture(GL_TEXTURE_2D, mTextureManager->getTexture("dirt"));
 
 	
-/*
+
 	glBegin(GL_QUADS);
 		glTexCoord2f (0.0, 0.0);		glVertex3f (0.0, 0.0, 0.0);
-		glTexCoord2f (1.0, 0.0);		glVertex3f (1000.0, 0.0, 0.0);
-		glTexCoord2f (1.0, 1.0);		glVertex3f (1000.0, 0, 1000.0);
-		glTexCoord2f (0.0, 1.0);		glVertex3f (0.0, 0, 1000.0);
+		glTexCoord2f (1.0, 0.0);		glVertex3f (5000.0, 0.0, 0.0);
+		glTexCoord2f (1.0, 1.0);		glVertex3f (5000.0, 0, 5000.0);
+		glTexCoord2f (0.0, 1.0);		glVertex3f (0.0, 0, 5000.0);
 	glEnd();
-	*/
+	
 	
 	glFlush();
 	glutSwapBuffers();

@@ -20,7 +20,6 @@
 #include <string>
 #include <map>
 
-
 class TextureManager {
 
 private:
